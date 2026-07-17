@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+title: KVCacheBench
+message: "If you use KVCacheBench, please cite the benchmark paper and the underlying method/library papers used in your experiments."
+type: software
+authors:
+  - name: KVCacheBench authors
+version: 0.1.0
+date-released: 2026-07-17
+repository-code: "https://github.com/REPLACE_WITH_OWNER/KVCacheBench"
+keywords:
+  - KV cache compression
+  - long-context LLMs
+  - benchmark
+  - diagnostics

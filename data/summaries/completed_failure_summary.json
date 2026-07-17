@@ -1,0 +1,2545 @@
+[
+  {
+    "budget_denoms": {
+      "0.25": 7744,
+      "0.5": 8712,
+      "0.75": 8712
+    },
+    "budget_failures": {
+      "0.25": 3354,
+      "0.5": 2382,
+      "0.75": 615
+    },
+    "compressed_rows": 29700,
+    "failure_rows": 6351,
+    "full_rows": 1100,
+    "gate": "Full-cache paired run",
+    "key": "ruler8k",
+    "label": "RULER-8K",
+    "method_budget": {
+      "AdaKVPress@0.25": {
+        "DRR": 0.9981896521007398,
+        "ECov": 1.0,
+        "ERR": 0.9996266195882669,
+        "GPR": 0.5721695700113083,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.7951420668290536,
+        "denom": 968,
+        "failures": 233,
+        "flip_rate": 0.24070247933884298,
+        "method": "AdaKVPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            99
+          ],
+          [
+            "cwe",
+            50
+          ]
+        ],
+        "unsupported": false
+      },
+      "AdaKVPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.8454006287858553,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.20220264738892715,
+        "denom": 968,
+        "failures": 71,
+        "flip_rate": 0.07334710743801653,
+        "method": "AdaKVPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            33
+          ],
+          [
+            "fwe",
+            15
+          ]
+        ],
+        "unsupported": false
+      },
+      "AdaKVPress@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9975304759096939,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.0025111269554199587,
+        "denom": 968,
+        "failures": 15,
+        "flip_rate": 0.015495867768595042,
+        "method": "AdaKVPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "fwe",
+            6
+          ],
+          [
+            "cwe",
+            4
+          ]
+        ],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.25": {
+        "DRR": 0.7711687622385719,
+        "ECov": 0.991812865497076,
+        "ERR": 0.8999618993075094,
+        "GPR": 0.4519822083182968,
+        "dataset": "RULER-8K",
+        "delta_NLL": 1.6330367178297795,
+        "denom": 968,
+        "failures": 513,
+        "flip_rate": 0.5299586776859504,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.25,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "vt",
+            100
+          ],
+          [
+            "niah_multikey_3",
+            91
+          ]
+        ],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.50": {
+        "DRR": 0.9689511703062879,
+        "ECov": 1.0,
+        "ERR": 0.9894383171845966,
+        "GPR": 0.642992886218369,
+        "dataset": "RULER-8K",
+        "delta_NLL": 1.1431433359502878,
+        "denom": 968,
+        "failures": 359,
+        "flip_rate": 0.37086776859504134,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.5,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "vt",
+            95
+          ],
+          [
+            "niah_multikey_3",
+            73
+          ]
+        ],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.75": {
+        "DRR": 0.99963069192575,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.7537377248148011,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.6955411315657942,
+        "denom": 968,
+        "failures": 171,
+        "flip_rate": 0.17665289256198347,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.75,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "vt",
+            79
+          ],
+          [
+            "niah_multikey_3",
+            28
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.25": {
+        "DRR": 0.999870594352926,
+        "ECov": 1.0,
+        "ERR": 0.9998692160239374,
+        "GPR": 0.5849069815915187,
+        "dataset": "RULER-8K",
+        "delta_NLL": 1.0431250381120556,
+        "denom": 968,
+        "failures": 293,
+        "flip_rate": 0.30268595041322316,
+        "method": "KeyDiffPress",
+        "retained": 0.25,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "niah_multikey_3",
+            93
+          ],
+          [
+            "cwe",
+            63
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.7252485996679644,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.5309993086714018,
+        "denom": 968,
+        "failures": 140,
+        "flip_rate": 0.1446280991735537,
+        "method": "KeyDiffPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_multikey_3",
+            59
+          ],
+          [
+            "cwe",
+            35
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.75": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9272355149017731,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.09660221462661057,
+        "denom": 968,
+        "failures": 52,
+        "flip_rate": 0.05371900826446281,
+        "method": "KeyDiffPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "cwe",
+            17
+          ],
+          [
+            "niah_multikey_3",
+            11
+          ]
+        ],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.25": {
+        "DRR": 0.9948708934240992,
+        "ECov": 1.0,
+        "ERR": 0.999125539639719,
+        "GPR": 0.5514268549126404,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.8970244029051616,
+        "denom": 968,
+        "failures": 246,
+        "flip_rate": 0.25413223140495866,
+        "method": "PyramidKVPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            97
+          ],
+          [
+            "cwe",
+            56
+          ]
+        ],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.759269444199359,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.3450253256037458,
+        "denom": 968,
+        "failures": 111,
+        "flip_rate": 0.11466942148760331,
+        "method": "PyramidKVPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            59
+          ],
+          [
+            "cwe",
+            23
+          ]
+        ],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.971132655682832,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.03292966627927854,
+        "denom": 968,
+        "failures": 24,
+        "flip_rate": 0.024793388429752067,
+        "method": "PyramidKVPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "fwe",
+            10
+          ],
+          [
+            "cwe",
+            8
+          ]
+        ],
+        "unsupported": false
+      },
+      "QuantizedCache@0.25": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.2608800170921516,
+        "dataset": "RULER-8K",
+        "delta_NLL": 2.4044520204952398,
+        "denom": 968,
+        "failures": 821,
+        "flip_rate": 0.8481404958677686,
+        "method": "QuantizedCache",
+        "retained": 0.25,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "niah_multikey_3",
+            99
+          ],
+          [
+            "vt",
+            91
+          ]
+        ],
+        "unsupported": false
+      },
+      "QuantizedCache@0.50": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9934758594752443,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.006853712996916987,
+        "denom": 968,
+        "failures": 27,
+        "flip_rate": 0.027892561983471075,
+        "method": "QuantizedCache",
+        "retained": 0.5,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "cwe",
+            11
+          ],
+          [
+            "fwe",
+            10
+          ]
+        ],
+        "unsupported": false
+      },
+      "QuantizedCache@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 1.000033323101234,
+        "dataset": "RULER-8K",
+        "delta_NLL": -3.331893197268244e-05,
+        "denom": 968,
+        "failures": 9,
+        "flip_rate": 0.009297520661157025,
+        "method": "QuantizedCache",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "fwe",
+            6
+          ],
+          [
+            "niah_multiquery",
+            2
+          ]
+        ],
+        "unsupported": false
+      },
+      "SnapKVPress@0.25": {
+        "DRR": 0.9948708934240992,
+        "ECov": 1.0,
+        "ERR": 0.999125539639719,
+        "GPR": 0.5514268549126404,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.8970244029051616,
+        "denom": 968,
+        "failures": 246,
+        "flip_rate": 0.25413223140495866,
+        "method": "SnapKVPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            97
+          ],
+          [
+            "cwe",
+            56
+          ]
+        ],
+        "unsupported": false
+      },
+      "SnapKVPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.759269444199359,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.3450253256037458,
+        "denom": 968,
+        "failures": 111,
+        "flip_rate": 0.11466942148760331,
+        "method": "SnapKVPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            59
+          ],
+          [
+            "cwe",
+            23
+          ]
+        ],
+        "unsupported": false
+      },
+      "SnapKVPress@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.971132655682832,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.03292966627927854,
+        "denom": 968,
+        "failures": 24,
+        "flip_rate": 0.024793388429752067,
+        "method": "SnapKVPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "fwe",
+            10
+          ],
+          [
+            "cwe",
+            8
+          ]
+        ],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.25": {
+        "DRR": 0.23360600660493874,
+        "ECov": 0.08124207858048162,
+        "ERR": 0.07905194896639763,
+        "GPR": 0.2829912350915903,
+        "dataset": "RULER-8K",
+        "delta_NLL": 2.1333348145981397,
+        "denom": 968,
+        "failures": 789,
+        "flip_rate": 0.8150826446280992,
+        "method": "StreamingLLMPress",
+        "retained": 0.25,
+        "signal": "Evidence deletion",
+        "top_tasks": [
+          [
+            "vt",
+            99
+          ],
+          [
+            "niah_multivalue",
+            94
+          ]
+        ],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.50": {
+        "DRR": 0.4913619822602701,
+        "ECov": 0.1729433272394881,
+        "ERR": 0.17128136945321587,
+        "GPR": 0.35057987764573106,
+        "dataset": "RULER-8K",
+        "delta_NLL": 1.9545043265804383,
+        "denom": 968,
+        "failures": 547,
+        "flip_rate": 0.5650826446280992,
+        "method": "StreamingLLMPress",
+        "retained": 0.5,
+        "signal": "Evidence deletion",
+        "top_tasks": [
+          [
+            "niah_multivalue",
+            88
+          ],
+          [
+            "vt",
+            66
+          ]
+        ],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.75": {
+        "DRR": 0.7709972852687996,
+        "ECov": 0.25818815331010453,
+        "ERR": 0.25818815331010453,
+        "GPR": 0.48515157071320103,
+        "dataset": "RULER-8K",
+        "delta_NLL": 1.5055923971964364,
+        "denom": 968,
+        "failures": 287,
+        "flip_rate": 0.2964876033057851,
+        "method": "StreamingLLMPress",
+        "retained": 0.75,
+        "signal": "Evidence deletion",
+        "top_tasks": [
+          [
+            "niah_multivalue",
+            63
+          ],
+          [
+            "niah_multiquery",
+            29
+          ]
+        ],
+        "unsupported": false
+      },
+      "TOVAPress@0.25": {
+        "DRR": 0.7859065922331907,
+        "ECov": 1.0,
+        "ERR": 0.9766362499346793,
+        "GPR": 0.5778025563000394,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.8331010938418951,
+        "denom": 968,
+        "failures": 213,
+        "flip_rate": 0.22004132231404958,
+        "method": "TOVAPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_multikey_3",
+            75
+          ],
+          [
+            "cwe",
+            63
+          ]
+        ],
+        "unsupported": false
+      },
+      "TOVAPress@0.50": {
+        "DRR": 0.984031647395759,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.881720090832566,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.17669767064601838,
+        "denom": 968,
+        "failures": 48,
+        "flip_rate": 0.049586776859504134,
+        "method": "TOVAPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "cwe",
+            18
+          ],
+          [
+            "niah_multikey_3",
+            13
+          ]
+        ],
+        "unsupported": false
+      },
+      "TOVAPress@0.75": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9521057078324452,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.07155135442507328,
+        "denom": 968,
+        "failures": 12,
+        "flip_rate": 0.012396694214876033,
+        "method": "TOVAPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "fwe",
+            7
+          ],
+          [
+            "cwe",
+            3
+          ]
+        ],
+        "unsupported": false
+      },
+      "ThinKPress@0.25": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "RULER-8K",
+        "delta_NLL": null,
+        "denom": 0,
+        "failures": 0,
+        "flip_rate": null,
+        "method": "ThinKPress",
+        "retained": 0.25,
+        "signal": "Unsupported",
+        "top_tasks": [],
+        "unsupported": true
+      },
+      "ThinKPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.024988992593033593,
+        "dataset": "RULER-8K",
+        "delta_NLL": 7.82724754557455,
+        "denom": 968,
+        "failures": 968,
+        "flip_rate": 1.0,
+        "method": "ThinKPress",
+        "retained": 0.5,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "niah_multikey_1",
+            100
+          ],
+          [
+            "niah_multikey_2",
+            100
+          ]
+        ],
+        "unsupported": false
+      },
+      "ThinKPress@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.988697238328989,
+        "dataset": "RULER-8K",
+        "delta_NLL": 0.012628546797214438,
+        "denom": 968,
+        "failures": 21,
+        "flip_rate": 0.02169421487603306,
+        "method": "ThinKPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "niah_multivalue",
+            10
+          ],
+          [
+            "cwe",
+            4
+          ]
+        ],
+        "unsupported": false
+      }
+    },
+    "paired_rows": 29700,
+    "unique_failure_sample_count": 968,
+    "unsupported_rows": 1100,
+    "valid_full_correct_rows": 25168
+  },
+  {
+    "budget_denoms": {
+      "0.25": 7608,
+      "0.5": 8559,
+      "0.75": 8559
+    },
+    "budget_failures": {
+      "0.25": 2953,
+      "0.5": 2082,
+      "0.75": 568
+    },
+    "compressed_rows": 25677,
+    "failure_rows": 5603,
+    "full_rows": 951,
+    "gate": "Full-cache-correct source split",
+    "key": "ruler16k",
+    "label": "RULER-16K",
+    "method_budget": {
+      "AdaKVPress@0.25": {
+        "DRR": 0.9978761076814561,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.7244921316281071,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.4086570547573384,
+        "denom": 951,
+        "failures": 131,
+        "flip_rate": 0.1377497371188223,
+        "method": "AdaKVPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            77
+          ],
+          [
+            "cwe",
+            24
+          ]
+        ],
+        "unsupported": false
+      },
+      "AdaKVPress@0.50": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 1.0342667515814867,
+        "dataset": "RULER-16K",
+        "delta_NLL": -0.017164838107754255,
+        "denom": 951,
+        "failures": 23,
+        "flip_rate": 0.024185068349106203,
+        "method": "AdaKVPress",
+        "retained": 0.5,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "cwe",
+            12
+          ],
+          [
+            "fwe",
+            8
+          ]
+        ],
+        "unsupported": false
+      },
+      "AdaKVPress@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9999853958586089,
+        "dataset": "RULER-16K",
+        "delta_NLL": 1.476702118452522e-05,
+        "denom": 951,
+        "failures": 7,
+        "flip_rate": 0.007360672975814932,
+        "method": "AdaKVPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "fwe",
+            4
+          ],
+          [
+            "cwe",
+            3
+          ]
+        ],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.25": {
+        "DRR": 0.801148784736491,
+        "ECov": 0.9955357142857143,
+        "ERR": 0.914427109057648,
+        "GPR": 0.4668699852277814,
+        "dataset": "RULER-16K",
+        "delta_NLL": 1.3945177663825248,
+        "denom": 951,
+        "failures": 448,
+        "flip_rate": 0.47108307045215564,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.25,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "vt",
+            98
+          ],
+          [
+            "niah_multikey_3",
+            95
+          ]
+        ],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.50": {
+        "DRR": 0.9754805510314772,
+        "ECov": 1.0,
+        "ERR": 0.991734410520341,
+        "GPR": 0.6425617210532739,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.8700574272232401,
+        "denom": 951,
+        "failures": 310,
+        "flip_rate": 0.32597266035751843,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "vt",
+            96
+          ],
+          [
+            "niah_multikey_3",
+            73
+          ]
+        ],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.75": {
+        "DRR": 0.9999699489049051,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.8345546824533452,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.4233149404344706,
+        "denom": 951,
+        "failures": 164,
+        "flip_rate": 0.17245005257623555,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.75,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "vt",
+            80
+          ],
+          [
+            "niah_multikey_3",
+            25
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.25": {
+        "DRR": 0.9997790901642111,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.557687651627823,
+        "dataset": "RULER-16K",
+        "delta_NLL": 1.0652766569878758,
+        "denom": 951,
+        "failures": 267,
+        "flip_rate": 0.2807570977917981,
+        "method": "KeyDiffPress",
+        "retained": 0.25,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "niah_multikey_3",
+            97
+          ],
+          [
+            "niah_multikey_2",
+            57
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.681158148771306,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.5945610404274931,
+        "denom": 951,
+        "failures": 114,
+        "flip_rate": 0.11987381703470032,
+        "method": "KeyDiffPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_multikey_3",
+            56
+          ],
+          [
+            "fwe",
+            21
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.75": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.920000228233545,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.1053801748026607,
+        "denom": 951,
+        "failures": 39,
+        "flip_rate": 0.04100946372239748,
+        "method": "KeyDiffPress",
+        "retained": 0.75,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_multivalue",
+            12
+          ],
+          [
+            "niah_multikey_3",
+            10
+          ]
+        ],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.25": {
+        "DRR": 0.9976153358884264,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.683726332273345,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.502370961163663,
+        "denom": 951,
+        "failures": 160,
+        "flip_rate": 0.16824395373291273,
+        "method": "PyramidKVPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            86
+          ],
+          [
+            "cwe",
+            29
+          ]
+        ],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9079823892717185,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.1169118975661817,
+        "denom": 951,
+        "failures": 34,
+        "flip_rate": 0.035751840168243953,
+        "method": "PyramidKVPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            11
+          ],
+          [
+            "cwe",
+            10
+          ]
+        ],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9696147573396677,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.03849129544396876,
+        "denom": 951,
+        "failures": 13,
+        "flip_rate": 0.013669821240799159,
+        "method": "PyramidKVPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "cwe",
+            6
+          ],
+          [
+            "fwe",
+            6
+          ]
+        ],
+        "unsupported": false
+      },
+      "QuantizedCache@0.25": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.2603469814832095,
+        "dataset": "RULER-16K",
+        "delta_NLL": 2.2304385754617413,
+        "denom": 951,
+        "failures": 883,
+        "flip_rate": 0.9284963196635121,
+        "method": "QuantizedCache",
+        "retained": 0.25,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            100
+          ],
+          [
+            "niah_multikey_3",
+            99
+          ]
+        ],
+        "unsupported": false
+      },
+      "QuantizedCache@0.50": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9979436118698413,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.0020726812237071846,
+        "denom": 951,
+        "failures": 28,
+        "flip_rate": 0.029442691903259727,
+        "method": "QuantizedCache",
+        "retained": 0.5,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "fwe",
+            15
+          ],
+          [
+            "cwe",
+            10
+          ]
+        ],
+        "unsupported": false
+      },
+      "QuantizedCache@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9653235045422437,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.03733782798460261,
+        "denom": 951,
+        "failures": 4,
+        "flip_rate": 0.004206098843322818,
+        "method": "QuantizedCache",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "cwe",
+            2
+          ],
+          [
+            "fwe",
+            2
+          ]
+        ],
+        "unsupported": false
+      },
+      "SnapKVPress@0.25": {
+        "DRR": 0.9976153358884264,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.683726332273345,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.502370961163663,
+        "denom": 951,
+        "failures": 160,
+        "flip_rate": 0.16824395373291273,
+        "method": "SnapKVPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            86
+          ],
+          [
+            "cwe",
+            29
+          ]
+        ],
+        "unsupported": false
+      },
+      "SnapKVPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9079823892717185,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.1169118975661817,
+        "denom": 951,
+        "failures": 34,
+        "flip_rate": 0.035751840168243953,
+        "method": "SnapKVPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_single_3",
+            11
+          ],
+          [
+            "cwe",
+            10
+          ]
+        ],
+        "unsupported": false
+      },
+      "SnapKVPress@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9696147573396677,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.03849129544396876,
+        "denom": 951,
+        "failures": 13,
+        "flip_rate": 0.013669821240799159,
+        "method": "SnapKVPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "cwe",
+            6
+          ],
+          [
+            "fwe",
+            6
+          ]
+        ],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.25": {
+        "DRR": 0.2278335896643037,
+        "ECov": 0.06957994579945799,
+        "ERR": 0.06901902298243762,
+        "GPR": 0.25984030574633316,
+        "dataset": "RULER-16K",
+        "delta_NLL": 2.290367208831417,
+        "denom": 951,
+        "failures": 738,
+        "flip_rate": 0.7760252365930599,
+        "method": "StreamingLLMPress",
+        "retained": 0.25,
+        "signal": "Evidence deletion",
+        "top_tasks": [
+          [
+            "niah_multivalue",
+            99
+          ],
+          [
+            "vt",
+            99
+          ]
+        ],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.50": {
+        "DRR": 0.47580518075705297,
+        "ECov": 0.16522522522522523,
+        "ERR": 0.16131871001436218,
+        "GPR": 0.3411344532495943,
+        "dataset": "RULER-16K",
+        "delta_NLL": 2.1071814186862676,
+        "denom": 951,
+        "failures": 555,
+        "flip_rate": 0.583596214511041,
+        "method": "StreamingLLMPress",
+        "retained": 0.5,
+        "signal": "Evidence deletion",
+        "top_tasks": [
+          [
+            "niah_multivalue",
+            96
+          ],
+          [
+            "vt",
+            78
+          ]
+        ],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.75": {
+        "DRR": 0.7578091958921037,
+        "ECov": 0.2768211920529801,
+        "ERR": 0.2638182434258241,
+        "GPR": 0.479860874575672,
+        "dataset": "RULER-16K",
+        "delta_NLL": 1.6890576829493156,
+        "denom": 951,
+        "failures": 302,
+        "flip_rate": 0.3175604626708728,
+        "method": "StreamingLLMPress",
+        "retained": 0.75,
+        "signal": "Evidence deletion",
+        "top_tasks": [
+          [
+            "niah_multivalue",
+            73
+          ],
+          [
+            "vt",
+            34
+          ]
+        ],
+        "unsupported": false
+      },
+      "TOVAPress@0.25": {
+        "DRR": 0.7877707684124451,
+        "ECov": 1.0,
+        "ERR": 0.9586906948867667,
+        "GPR": 0.6007220203626015,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.7588132597260704,
+        "denom": 951,
+        "failures": 166,
+        "flip_rate": 0.17455310199789695,
+        "method": "TOVAPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_multikey_3",
+            91
+          ],
+          [
+            "fwe",
+            25
+          ]
+        ],
+        "unsupported": false
+      },
+      "TOVAPress@0.50": {
+        "DRR": 0.9899047095705169,
+        "ECov": 1.0,
+        "ERR": 0.9996012759170654,
+        "GPR": 0.8995925329760875,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.1345111425385289,
+        "denom": 951,
+        "failures": 33,
+        "flip_rate": 0.03470031545741325,
+        "method": "TOVAPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "niah_multikey_3",
+            13
+          ],
+          [
+            "fwe",
+            11
+          ]
+        ],
+        "unsupported": false
+      },
+      "TOVAPress@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 1.000221900104374,
+        "dataset": "RULER-16K",
+        "delta_NLL": -0.0002217489360939832,
+        "denom": 951,
+        "failures": 9,
+        "flip_rate": 0.00946372239747634,
+        "method": "TOVAPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "fwe",
+            6
+          ],
+          [
+            "cwe",
+            3
+          ]
+        ],
+        "unsupported": false
+      },
+      "ThinKPress@0.25": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "RULER-16K",
+        "delta_NLL": null,
+        "denom": 0,
+        "failures": 0,
+        "flip_rate": null,
+        "method": "ThinKPress",
+        "retained": 0.25,
+        "signal": "Unsupported",
+        "top_tasks": [],
+        "unsupported": true
+      },
+      "ThinKPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.014547312463956751,
+        "dataset": "RULER-16K",
+        "delta_NLL": 7.958134629318895,
+        "denom": 951,
+        "failures": 951,
+        "flip_rate": 1.0,
+        "method": "ThinKPress",
+        "retained": 0.5,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "niah_multikey_1",
+            100
+          ],
+          [
+            "niah_multikey_2",
+            100
+          ]
+        ],
+        "unsupported": false
+      },
+      "ThinKPress@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9830052477908631,
+        "dataset": "RULER-16K",
+        "delta_NLL": 0.023187982597440815,
+        "denom": 951,
+        "failures": 17,
+        "flip_rate": 0.017875920084121977,
+        "method": "ThinKPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "cwe",
+            8
+          ],
+          [
+            "niah_multivalue",
+            5
+          ]
+        ],
+        "unsupported": false
+      }
+    },
+    "paired_rows": 25677,
+    "unique_failure_sample_count": 951,
+    "unsupported_rows": 951,
+    "valid_full_correct_rows": 24726
+  },
+  {
+    "budget_denoms": {
+      "0.25": 720,
+      "0.5": 810,
+      "0.75": 810
+    },
+    "budget_failures": {
+      "0.25": 2,
+      "0.5": 2,
+      "0.75": 1
+    },
+    "compressed_rows": 2430,
+    "failure_rows": 5,
+    "full_rows": 90,
+    "gate": "90 curated full-cache-correct samples",
+    "key": "longbench",
+    "label": "LongBench V2 proxy90",
+    "method_budget": {
+      "AdaKVPress@0.25": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "AdaKVPress",
+        "retained": 0.25,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "AdaKVPress@0.50": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "AdaKVPress",
+        "retained": 0.5,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "AdaKVPress@0.75": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "AdaKVPress",
+        "retained": 0.75,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.25": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.25,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.50": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.5,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.75": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.75,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.25": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 0.9956140350877193,
+        "GPR": 1.0,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": 0.0,
+        "denom": 90,
+        "failures": 1,
+        "flip_rate": 0.011111111111111112,
+        "method": "KeyDiffPress",
+        "retained": 0.25,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "longbench_v2",
+            1
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.50": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 1.0,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": 0.0,
+        "denom": 90,
+        "failures": 1,
+        "flip_rate": 0.011111111111111112,
+        "method": "KeyDiffPress",
+        "retained": 0.5,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "longbench_v2",
+            1
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.75": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 1.0,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": 0.0,
+        "denom": 90,
+        "failures": 1,
+        "flip_rate": 0.011111111111111112,
+        "method": "KeyDiffPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "longbench_v2",
+            1
+          ]
+        ],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.25": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "PyramidKVPress",
+        "retained": 0.25,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.50": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "PyramidKVPress",
+        "retained": 0.5,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.75": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "PyramidKVPress",
+        "retained": 0.75,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "QuantizedCache@0.25": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 1.0,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": 0.0,
+        "denom": 90,
+        "failures": 1,
+        "flip_rate": 0.011111111111111112,
+        "method": "QuantizedCache",
+        "retained": 0.25,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "longbench_v2",
+            1
+          ]
+        ],
+        "unsupported": false
+      },
+      "QuantizedCache@0.50": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "QuantizedCache",
+        "retained": 0.5,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "QuantizedCache@0.75": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "QuantizedCache",
+        "retained": 0.75,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "SnapKVPress@0.25": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "SnapKVPress",
+        "retained": 0.25,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "SnapKVPress@0.50": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "SnapKVPress",
+        "retained": 0.5,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "SnapKVPress@0.75": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "SnapKVPress",
+        "retained": 0.75,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.25": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "StreamingLLMPress",
+        "retained": 0.25,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.50": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "StreamingLLMPress",
+        "retained": 0.5,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.75": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "StreamingLLMPress",
+        "retained": 0.75,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "TOVAPress@0.25": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "TOVAPress",
+        "retained": 0.25,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "TOVAPress@0.50": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "TOVAPress",
+        "retained": 0.5,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "TOVAPress@0.75": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "TOVAPress",
+        "retained": 0.75,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      },
+      "ThinKPress@0.25": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 0,
+        "failures": 0,
+        "flip_rate": null,
+        "method": "ThinKPress",
+        "retained": 0.25,
+        "signal": "Unsupported",
+        "top_tasks": [],
+        "unsupported": true
+      },
+      "ThinKPress@0.50": {
+        "DRR": null,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 1.0,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": 0.0,
+        "denom": 90,
+        "failures": 1,
+        "flip_rate": 0.011111111111111112,
+        "method": "ThinKPress",
+        "retained": 0.5,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "longbench_v2",
+            1
+          ]
+        ],
+        "unsupported": false
+      },
+      "ThinKPress@0.75": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "LongBench V2 proxy90",
+        "delta_NLL": null,
+        "denom": 90,
+        "failures": 0,
+        "flip_rate": 0.0,
+        "method": "ThinKPress",
+        "retained": 0.75,
+        "signal": "No selected failures",
+        "top_tasks": [],
+        "unsupported": false
+      }
+    },
+    "paired_rows": 2430,
+    "unique_failure_sample_count": 1,
+    "unsupported_rows": 90,
+    "valid_full_correct_rows": 2340
+  },
+  {
+    "budget_denoms": {
+      "0.25": 1656,
+      "0.5": 1863,
+      "0.75": 1863
+    },
+    "budget_failures": {
+      "0.25": 590,
+      "0.5": 457,
+      "0.75": 157
+    },
+    "compressed_rows": 10800,
+    "failure_rows": 1204,
+    "full_rows": 400,
+    "gate": "400 gold-evidence QA samples",
+    "key": "qasper_hotpot",
+    "label": "Qasper/HotpotQA gold",
+    "method_budget": {
+      "AdaKVPress@0.25": {
+        "DRR": 0.9886036556894403,
+        "ECov": 1.0,
+        "ERR": 0.9997814207650273,
+        "GPR": 0.611428002206694,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.7298321415892002,
+        "denom": 207,
+        "failures": 25,
+        "flip_rate": 0.12077294685990338,
+        "method": "AdaKVPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            18
+          ],
+          [
+            "qasper",
+            7
+          ]
+        ],
+        "unsupported": false
+      },
+      "AdaKVPress@0.50": {
+        "DRR": 0.9999439400089195,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.8035999995381398,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.28474262670652556,
+        "denom": 207,
+        "failures": 14,
+        "flip_rate": 0.06763285024154589,
+        "method": "AdaKVPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            8
+          ],
+          [
+            "qasper",
+            6
+          ]
+        ],
+        "unsupported": false
+      },
+      "AdaKVPress@0.75": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9264459534938949,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.09135788717244671,
+        "denom": 207,
+        "failures": 5,
+        "flip_rate": 0.024154589371980676,
+        "method": "AdaKVPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            5
+          ]
+        ],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.25": {
+        "DRR": 0.8067887252980729,
+        "ECov": 0.9281842818428184,
+        "ERR": 0.7772732051279359,
+        "GPR": 0.2382044587095194,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 2.7460437519301006,
+        "denom": 207,
+        "failures": 123,
+        "flip_rate": 0.5942028985507246,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.25,
+        "signal": "Likelihood drift",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            99
+          ],
+          [
+            "qasper",
+            24
+          ]
+        ],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.50": {
+        "DRR": 0.969963290111552,
+        "ECov": 0.9846743295019158,
+        "ERR": 0.9613677462910574,
+        "GPR": 0.4108334781980007,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 1.704017817223508,
+        "denom": 207,
+        "failures": 87,
+        "flip_rate": 0.42028985507246375,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.5,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            65
+          ],
+          [
+            "qasper",
+            22
+          ]
+        ],
+        "unsupported": false
+      },
+      "ChunkKVPress_Knorm@0.75": {
+        "DRR": 0.9989111847976947,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.6698670471584014,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.7594996582548593,
+        "denom": 207,
+        "failures": 49,
+        "flip_rate": 0.23671497584541062,
+        "method": "ChunkKVPress_Knorm",
+        "retained": 0.75,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            35
+          ],
+          [
+            "qasper",
+            14
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.25": {
+        "DRR": 0.9999709657150674,
+        "ECov": 1.0,
+        "ERR": 0.9999298540965207,
+        "GPR": 0.2601852690137856,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 3.258552965463656,
+        "denom": 207,
+        "failures": 132,
+        "flip_rate": 0.6376811594202898,
+        "method": "KeyDiffPress",
+        "retained": 0.25,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            98
+          ],
+          [
+            "qasper",
+            34
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.5169145107878131,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 1.2947456627710439,
+        "denom": 207,
+        "failures": 75,
+        "flip_rate": 0.36231884057971014,
+        "method": "KeyDiffPress",
+        "retained": 0.5,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            51
+          ],
+          [
+            "qasper",
+            24
+          ]
+        ],
+        "unsupported": false
+      },
+      "KeyDiffPress@0.75": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.797990444909192,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.32453398783631743,
+        "denom": 207,
+        "failures": 35,
+        "flip_rate": 0.16908212560386474,
+        "method": "KeyDiffPress",
+        "retained": 0.75,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            24
+          ],
+          [
+            "qasper",
+            11
+          ]
+        ],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.25": {
+        "DRR": 0.9861819154323661,
+        "ECov": 1.0,
+        "ERR": 0.996598917019755,
+        "GPR": 0.5520080962794096,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.8291381520415214,
+        "denom": 207,
+        "failures": 29,
+        "flip_rate": 0.14009661835748793,
+        "method": "PyramidKVPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            22
+          ],
+          [
+            "qasper",
+            7
+          ]
+        ],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.7019339510837015,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.48880388454992296,
+        "denom": 207,
+        "failures": 15,
+        "flip_rate": 0.07246376811594203,
+        "method": "PyramidKVPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            10
+          ],
+          [
+            "qasper",
+            5
+          ]
+        ],
+        "unsupported": false
+      },
+      "PyramidKVPress@0.75": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.8442895208801625,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.18777093215026286,
+        "denom": 207,
+        "failures": 6,
+        "flip_rate": 0.028985507246376812,
+        "method": "PyramidKVPress",
+        "retained": 0.75,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            5
+          ],
+          [
+            "qasper",
+            1
+          ]
+        ],
+        "unsupported": false
+      },
+      "QuantizedCache@0.25": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.15764757234975602,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 5.668881843283393,
+        "denom": 207,
+        "failures": 149,
+        "flip_rate": 0.7198067632850241,
+        "method": "QuantizedCache",
+        "retained": 0.25,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            107
+          ],
+          [
+            "qasper",
+            42
+          ]
+        ],
+        "unsupported": false
+      },
+      "QuantizedCache@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.986923564055628,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.01484591351574444,
+        "denom": 207,
+        "failures": 11,
+        "flip_rate": 0.05314009661835749,
+        "method": "QuantizedCache",
+        "retained": 0.5,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            8
+          ],
+          [
+            "qasper",
+            3
+          ]
+        ],
+        "unsupported": false
+      },
+      "QuantizedCache@0.75": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9971713804954694,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.0028456147131118437,
+        "denom": 207,
+        "failures": 4,
+        "flip_rate": 0.01932367149758454,
+        "method": "QuantizedCache",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            3
+          ],
+          [
+            "qasper",
+            1
+          ]
+        ],
+        "unsupported": false
+      },
+      "SnapKVPress@0.25": {
+        "DRR": 0.9861819154323661,
+        "ECov": 1.0,
+        "ERR": 0.996598917019755,
+        "GPR": 0.5520080962794096,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.8291381520415214,
+        "denom": 207,
+        "failures": 29,
+        "flip_rate": 0.14009661835748793,
+        "method": "SnapKVPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            22
+          ],
+          [
+            "qasper",
+            7
+          ]
+        ],
+        "unsupported": false
+      },
+      "SnapKVPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.7019339510837015,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.48880388454992296,
+        "denom": 207,
+        "failures": 15,
+        "flip_rate": 0.07246376811594203,
+        "method": "SnapKVPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            10
+          ],
+          [
+            "qasper",
+            5
+          ]
+        ],
+        "unsupported": false
+      },
+      "SnapKVPress@0.75": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.8442895208801625,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.18777093215026286,
+        "denom": 207,
+        "failures": 6,
+        "flip_rate": 0.028985507246376812,
+        "method": "SnapKVPress",
+        "retained": 0.75,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            5
+          ],
+          [
+            "qasper",
+            1
+          ]
+        ],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.25": {
+        "DRR": 0.22970310826331417,
+        "ECov": 0.06359649122807016,
+        "ERR": 0.06359649122807016,
+        "GPR": 0.3479586624102687,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 1.8440513521268707,
+        "denom": 207,
+        "failures": 76,
+        "flip_rate": 0.3671497584541063,
+        "method": "StreamingLLMPress",
+        "retained": 0.25,
+        "signal": "Evidence deletion",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            50
+          ],
+          [
+            "qasper",
+            26
+          ]
+        ],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.50": {
+        "DRR": 0.44873727724478435,
+        "ECov": 0.19196428571428573,
+        "ERR": 0.18872407834101382,
+        "GPR": 0.3492207909121077,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 2.0180574960737454,
+        "denom": 207,
+        "failures": 56,
+        "flip_rate": 0.27053140096618356,
+        "method": "StreamingLLMPress",
+        "retained": 0.5,
+        "signal": "Evidence deletion",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            36
+          ],
+          [
+            "qasper",
+            20
+          ]
+        ],
+        "unsupported": false
+      },
+      "StreamingLLMPress@0.75": {
+        "DRR": 0.6287770671536108,
+        "ECov": 0.37654320987654316,
+        "ERR": 0.3390090135119375,
+        "GPR": 0.41491970540735656,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 1.7836948748224568,
+        "denom": 207,
+        "failures": 27,
+        "flip_rate": 0.13043478260869565,
+        "method": "StreamingLLMPress",
+        "retained": 0.75,
+        "signal": "Evidence deletion",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            15
+          ],
+          [
+            "qasper",
+            12
+          ]
+        ],
+        "unsupported": false
+      },
+      "TOVAPress@0.25": {
+        "DRR": 0.8104028869321125,
+        "ECov": 1.0,
+        "ERR": 0.963741374856702,
+        "GPR": 0.5804404810014998,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.8404191870322,
+        "denom": 207,
+        "failures": 27,
+        "flip_rate": 0.13043478260869565,
+        "method": "TOVAPress",
+        "retained": 0.25,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            17
+          ],
+          [
+            "qasper",
+            10
+          ]
+        ],
+        "unsupported": false
+      },
+      "TOVAPress@0.50": {
+        "DRR": 0.9800856877146108,
+        "ECov": 1.0,
+        "ERR": 0.9991181657848324,
+        "GPR": 0.7848677932407179,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.3696402870636578,
+        "denom": 207,
+        "failures": 14,
+        "flip_rate": 0.06763285024154589,
+        "method": "TOVAPress",
+        "retained": 0.5,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            8
+          ],
+          [
+            "qasper",
+            6
+          ]
+        ],
+        "unsupported": false
+      },
+      "TOVAPress@0.75": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.8469713414156755,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.20483164427524514,
+        "denom": 207,
+        "failures": 3,
+        "flip_rate": 0.014492753623188406,
+        "method": "TOVAPress",
+        "retained": 0.75,
+        "signal": "Mixed",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            3
+          ]
+        ],
+        "unsupported": false
+      },
+      "ThinKPress@0.25": {
+        "DRR": null,
+        "ECov": null,
+        "ERR": null,
+        "GPR": null,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": null,
+        "denom": 0,
+        "failures": 0,
+        "flip_rate": null,
+        "method": "ThinKPress",
+        "retained": 0.25,
+        "signal": "Unsupported",
+        "top_tasks": [],
+        "unsupported": true
+      },
+      "ThinKPress@0.50": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.07160713828438109,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 10.27963271531382,
+        "denom": 207,
+        "failures": 170,
+        "flip_rate": 0.821256038647343,
+        "method": "ThinKPress",
+        "retained": 0.5,
+        "signal": "Retained but drifted",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            124
+          ],
+          [
+            "qasper",
+            46
+          ]
+        ],
+        "unsupported": false
+      },
+      "ThinKPress@0.75": {
+        "DRR": 1.0,
+        "ECov": 1.0,
+        "ERR": 1.0,
+        "GPR": 0.9885458096351076,
+        "dataset": "Qasper/HotpotQA gold",
+        "delta_NLL": 0.01179787551620447,
+        "denom": 207,
+        "failures": 22,
+        "flip_rate": 0.10628019323671498,
+        "method": "ThinKPress",
+        "retained": 0.75,
+        "signal": "Scorer/output fragility",
+        "top_tasks": [
+          [
+            "hotpotqa",
+            16
+          ],
+          [
+            "qasper",
+            6
+          ]
+        ],
+        "unsupported": false
+      }
+    },
+    "paired_rows": 10800,
+    "unique_failure_sample_count": 175,
+    "unsupported_rows": 400,
+    "valid_full_correct_rows": 5382
+  }
+]

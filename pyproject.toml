@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kvcachebench"
+version = "0.1.0"
+description = "Failure-focused diagnostics and public artifacts for KV cache compression benchmarks."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "KVCacheBench authors"}]
+keywords = ["kv-cache", "long-context", "benchmark", "llm", "diagnostics"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+analysis = ["pandas>=2.0", "matplotlib>=3.8"]
+inference = ["accelerate", "transformers", "kvpress==0.5.3", "torch"]
+dev = ["pytest"]
+
+[project.scripts]
+kvcachebench = "kvcachebench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

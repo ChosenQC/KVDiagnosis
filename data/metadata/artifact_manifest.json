@@ -1,0 +1,161 @@
+{
+  "context_demand": {
+    "dataset": "RULER-8K selected failures",
+    "dimensions": [
+      "evidence_presence",
+      "cue_integrity",
+      "long_range_retrieval",
+      "exact_token_fidelity",
+      "answer_format_alignment",
+      "logit_stability_demand",
+      "attention_accessibility_demand"
+    ],
+    "rows": 6351,
+    "unique_samples": 968
+  },
+  "created_at_utc": "2026-07-17T21:56:24.787639+00:00",
+  "files": [
+    {
+      "bytes": 27966737,
+      "path": "data/processed/selected_failures/all_selected_failures.jsonl",
+      "rows": 13163,
+      "sha256": "eb7bf361e21b66e649833d18f9fa3fcc1f50246706c92b0aea7ad1e21ce33059"
+    },
+    {
+      "bytes": 7435,
+      "path": "data/processed/selected_failures/longbench_v2_proxy90.jsonl",
+      "rows": 5,
+      "sha256": "1c1e8475c627aa4de4feead9da11b264f9d0a2a639c494ce647523dbe6ab50df"
+    },
+    {
+      "bytes": 2574519,
+      "path": "data/processed/selected_failures/qasper_hotpot.jsonl",
+      "rows": 1204,
+      "sha256": "7b1f1b9e337d4ea24e11fc18bd47a8dfa83b17a4f90f031f0942745dc2fa572a"
+    },
+    {
+      "bytes": 11958370,
+      "path": "data/processed/selected_failures/ruler16k.jsonl",
+      "rows": 5603,
+      "sha256": "4f022b1106dded8fc6a32c9a2433782ed28fcae67a2503aad7d9e8efeeda4135"
+    },
+    {
+      "bytes": 13426413,
+      "path": "data/processed/selected_failures/ruler8k.jsonl",
+      "rows": 6351,
+      "sha256": "8a0c7eb3caf7b0385cbb62f520e55cfcb3aac3cd1330d3bef6e7f997efccfdf8"
+    },
+    {
+      "bytes": 3226527,
+      "path": "data/context_demand/ruler8k_context_demand_dataset.csv",
+      "rows": 6352,
+      "sha256": "aa9d302e0561bdce65c3e26e874f9fdb1b96c579921415620ae0bf5af51b14c5"
+    },
+    {
+      "bytes": 10479834,
+      "path": "data/context_demand/ruler8k_context_demand_dataset.jsonl",
+      "rows": 6351,
+      "sha256": "fa68270ba409998d662c41091d3ed38227d2bd81a9218409f4d765813c20b9f2"
+    },
+    {
+      "bytes": 1903,
+      "path": "data/context_demand/summary.json",
+      "rows": null,
+      "sha256": "213cccb33db10987f96d79b989162185e569ed36b7525cb9d25e54773d59fe98"
+    },
+    {
+      "bytes": 1715,
+      "path": "data/context_demand/validation_report.json",
+      "rows": null,
+      "sha256": "9910f753c51337ad52173895fe868275f06e65a4abb934b953345351507cf4f3"
+    },
+    {
+      "bytes": 12876,
+      "path": "data/summaries/completed_failure_summary.csv",
+      "rows": 109,
+      "sha256": "d90c09bd0d09081bd18c5860af93eb0724bacbf28a319a3d213f233dc944c54a"
+    },
+    {
+      "bytes": 61752,
+      "path": "data/summaries/completed_failure_summary.json",
+      "rows": null,
+      "sha256": "e8bb3f7d57495c91eaeb93336d4e2b95b534732a8c82f20c67880eebcc84740e"
+    },
+    {
+      "bytes": 2685,
+      "path": "data/summaries/longbench_v2_proxy90_summary_by_family_budget.csv",
+      "rows": 28,
+      "sha256": "e810e02f6d378c37c13347aca0e9b7a7972256f14dc3d3405af9575ad6ecab03"
+    },
+    {
+      "bytes": 2994,
+      "path": "data/summaries/longbench_v2_proxy90_summary_by_task_method_budget.csv",
+      "rows": 28,
+      "sha256": "3e80dc954bd94ae57ca027a65b3ff8470c05d43d673f1ac65fb5baf2282c7e4b"
+    },
+    {
+      "bytes": 1464,
+      "path": "data/summaries/qasper_hotpot_failure_profiles.csv",
+      "rows": 28,
+      "sha256": "85375c29d99698f0c558feaa180a70c900ae60bab7c1216381dca8bf54b81347"
+    },
+    {
+      "bytes": 7462,
+      "path": "data/summaries/qasper_hotpot_summary_by_family_budget.csv",
+      "rows": 55,
+      "sha256": "66c56dc2e50885b4ec639387335f6a77d117aab7f800724f926427c9d4b3724f"
+    },
+    {
+      "bytes": 7715,
+      "path": "data/summaries/qasper_hotpot_summary_by_task_method_budget.csv",
+      "rows": 55,
+      "sha256": "22d3d30ef6aae0b76a3bcd28e47d0871c2f208c21225c4a670b6d08aae631d12"
+    },
+    {
+      "bytes": 25377,
+      "path": "data/summaries/ruler16k_summary_by_family_budget.csv",
+      "rows": 190,
+      "sha256": "5a03fb27cb84c48a982aa1c4a3b9d6b49f336e4c33d1613b85cc4b08f6dbd992"
+    },
+    {
+      "bytes": 40585,
+      "path": "data/summaries/ruler16k_summary_by_task_method_budget.csv",
+      "rows": 298,
+      "sha256": "ed0586e38ccc4b9f891d1885594dbf0a2b3cd4dee5be4849a39b6e8b7fe9fef8"
+    },
+    {
+      "bytes": 25551,
+      "path": "data/summaries/ruler8k_summary_by_family_budget.csv",
+      "rows": 190,
+      "sha256": "4ce968dbbedc993e5aeef0e6fc43b18f6dfa076316bbc41c89667718c570b980"
+    },
+    {
+      "bytes": 40766,
+      "path": "data/summaries/ruler8k_summary_by_task_method_budget.csv",
+      "rows": 298,
+      "sha256": "95e4951b808dde506b63f7750bfe2f582eac0390812c480075ef7fe2897ea643"
+    },
+    {
+      "bytes": 10278,
+      "path": "data/summaries/selected_failures_by_dataset_method_budget.csv",
+      "rows": 84,
+      "sha256": "64161c51cca60bb3bdbcec936c40ab60b2b559ab283d3332d29e2608426b1459"
+    },
+    {
+      "bytes": 100111,
+      "path": "data/examples/selected_failures_sample.jsonl",
+      "rows": 30,
+      "sha256": "07de6a0f24399cddfc7cbdee3037a224f932536396de2fbe79b5e5bc83bddb7c"
+    }
+  ],
+  "name": "KVCacheBench public artifacts",
+  "selected_failure_counts": {
+    "all": 13163,
+    "longbench_v2_proxy90": 5,
+    "qasper_hotpot": 1204,
+    "ruler16k": 5603,
+    "ruler8k": 6351
+  },
+  "selected_failure_definition": "FullCache correct and compressed-cache run incorrect for the same sample, model, prompt, tokenizer, and decoding setup.",
+  "source_workspace": "/mnt/data/u/qiuc/KVbench"
+}
