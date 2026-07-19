@@ -36,27 +36,54 @@ audit. QFilter and Random are not part of the released experimental matrix.
 ## Diagnostic Protocol
 
 <p align="center">
-  <img src="assets/method-overview.png" width="100%" alt="The two-layer KVDiagnosis protocol">
+  <img src="assets/method-overview.png" width="100%" alt="The population-first KVDiagnosis workflow">
 </p>
 
-The protocol separates **how often compression fails** from **what changed
-inside a failure**. Layer 1 measures endpoint quality on the full population.
-Layer 2 is applied only after each method-ratio cell materializes its own C->W
-view, keeping own failure sets distinct from matched intersections.
+The population-first workflow records every supported method-setting cell in a
+complete paired ledger. Only after that ledger is frozen does each cell select
+its own C->W rows for cache, logit, attention, and decode probes. Reporting
+keeps own-failure profiles separate from matched-intersection comparisons.
 
 ## Main Results
 
+### Population Outcomes
+
 <p align="center">
-  <img src="assets/main-results.png" width="100%" alt="KVDiagnosis main experimental results">
+  <img src="assets/population-outcomes.png" width="82%" alt="Mean task score and compression-induced failure rate across eight methods">
 </p>
 
-The main audit shows four recurring patterns: C->W failures grow rapidly as the
-configured KV ratio tightens; slot-wise evidence coverage varies sharply across
-methods; high position coverage does not guarantee stable gold-answer
-likelihood; and different compressors often fail on different source examples.
-Stars mark ThinK and QuantizedCache, where token positions are structurally
-preserved rather than selected. The 75/50/25 settings are mechanism-specific
-ratios, not byte-equivalent memory budgets.
+Stronger compression raises C->W frequency, but the degradation is strongly
+method dependent. The 75/50/25 columns order compression severity within each
+method; they are not byte-equivalent across mechanisms.
+
+### Failure Identity
+
+<p align="center">
+  <img src="assets/failure-views.png" width="82%" alt="Failure growth by workload and SnapKV-TOVA failure-set overlap">
+</p>
+
+Failure frequency grows on every workload, while low SnapKV-TOVA Jaccard in
+most cells shows why each compressor must retain its own failure population.
+
+### Failure Diagnostics
+
+<p align="center">
+  <img src="assets/diagnostic-profiles.png" width="82%" alt="Slot-wise evidence coverage and gold-answer likelihood drift">
+</p>
+
+Low or partial slot coverage is common, but high position coverage can coexist
+with severe gold-answer likelihood drift. Stars mark ThinK and QuantizedCache,
+whose token positions are structurally preserved rather than selected.
+
+### Evidence-Annotated QA Transfer
+
+<p align="center">
+  <img src="assets/qa-transfer.png" width="82%" alt="Failure-signature transfer to Qasper and HotpotQA">
+</p>
+
+The same coverage and likelihood signatures appear on Qasper and HotpotQA.
+These evidence-mapped bridges support diagnostic transfer, not official QA
+ranking.
 
 ## Quick Start
 
