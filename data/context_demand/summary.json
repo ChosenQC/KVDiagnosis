@@ -1,90 +1,15 @@
 {
-  "source_scores": "results/ruler8k_flip_demand_scores/scored_flip_rows.jsonl",
-  "output_dir": "results/ruler8k_context_demand_dataset",
-  "rows": 6351,
-  "unique_samples": 968,
+  "attention_available": 4608,
   "metrics": [
-    "ERR",
+    "ERR_slot",
+    "ECov_slot",
     "delta_NLL",
     "KL",
     "TopK",
     "EAR"
   ],
-  "gpt_labels": [
-    "evidence_presence",
-    "cue_integrity",
-    "long_range_retrieval",
-    "exact_token_fidelity",
-    "answer_format_alignment"
-  ],
-  "demand_scores": [
-    "evidence_presence",
-    "cue_integrity",
-    "long_range_retrieval",
-    "exact_token_fidelity",
-    "answer_format_alignment",
-    "logit_stability_demand",
-    "attention_accessibility_demand"
-  ],
-  "metric_status_counts": {
-    "ERR": {
-      "available": 6351
-    },
-    "delta_NLL": {
-      "available": 6351
-    },
-    "KL": {
-      "available": 6351
-    },
-    "TopK": {
-      "available": 6351
-    },
-    "EAR": {
-      "available": 6351
-    }
-  },
-  "gpt_label_status_counts": {
-    "evidence_presence": {
-      "available": 6351
-    },
-    "cue_integrity": {
-      "available": 6351
-    },
-    "long_range_retrieval": {
-      "available": 6351
-    },
-    "exact_token_fidelity": {
-      "available": 6351
-    },
-    "answer_format_alignment": {
-      "available": 6351
-    }
-  },
-  "demand_score_status_counts": {
-    "evidence_presence": {
-      "available": 6351
-    },
-    "cue_integrity": {
-      "available": 6351
-    },
-    "long_range_retrieval": {
-      "available": 6351
-    },
-    "exact_token_fidelity": {
-      "available": 6351
-    },
-    "answer_format_alignment": {
-      "available": 6351
-    },
-    "logit_stability_demand": {
-      "available": 6351
-    },
-    "attention_accessibility_demand": {
-      "available": 6351
-    }
-  },
-  "outputs": {
-    "jsonl": "results/ruler8k_context_demand_dataset/ruler8k_context_demand_dataset.jsonl",
-    "csv": "results/ruler8k_context_demand_dataset/ruler8k_context_demand_dataset.csv"
-  }
+  "rows": 5970,
+  "schema_version": "kvcachebench.context_demand.v0.2",
+  "topk_available": 5970,
+  "unique_samples": 968
 }

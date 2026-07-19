@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  smoke:
+  release-gates:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,11 +14,11 @@ jobs:
           python-version: '3.11'
       - name: Install package
         run: python -m pip install --no-deps -e .
-      - name: Compile Python sources
-        run: python -m py_compile src/kvcachebench/*.py scripts/export_selected_failures.py tests/*.py
+      - name: Run complete release audit
+        run: python scripts/check_release.py
       - name: Validate selected-failure corpus
         run: kvcachebench validate data/processed/selected_failures/all_selected_failures.jsonl
-      - name: Summarize selected-failure corpus
+      - name: Regenerate a summary
         run: kvcachebench summarize data/processed/selected_failures/all_selected_failures.jsonl --group-by dataset,method_name,retained_budget --output /tmp/selected_failures_summary.csv
       - name: Run smoke tests without pytest dependency
         run: |
@@ -34,6 +34,10 @@ jobs:
           rows = read_jsonl(Path('tests/fixtures/selected_failures_sample.jsonl'))
           report = validate_selected_failure_rows(rows)
           assert report['ok'], report
-          full = validate_selected_failure_rows(read_jsonl('data/processed/selected_failures/all_selected_failures.jsonl'))
-          assert full['rows'] == 13163 and full['error_count'] == 0, full
+          full = validate_selected_failure_rows(
+              read_jsonl('data/processed/selected_failures/all_selected_failures.jsonl')
+          )
+          assert full['rows'] == 12520 and full['error_count'] == 0, full
+          assert full['attention_available'] == 7038, full
+          assert full['topk_available'] == 8400, full
           PY

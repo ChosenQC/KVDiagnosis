@@ -1,0 +1,40 @@
+{
+  "ECov_slot_threshold": 0.5,
+  "error_count": 0,
+  "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "schema_version": "kvbench.slot_ecov.v1",
+  "sources": {
+    "qasper_hotpot": {
+      "completed_keys": 1154,
+      "failed_files": 0,
+      "manifest_keys": 1154,
+      "missing_examples": [],
+      "missing_keys": 0,
+      "unexpected_keys": 0
+    },
+    "ruler16k": {
+      "completed_keys": 5396,
+      "failed_files": 0,
+      "manifest_keys": 5396,
+      "missing_examples": [],
+      "missing_keys": 0,
+      "unexpected_keys": 0
+    },
+    "ruler8k": {
+      "completed_keys": 5970,
+      "failed_files": 0,
+      "manifest_keys": 5970,
+      "missing_examples": [],
+      "missing_keys": 0,
+      "unexpected_keys": 0
+    }
+  },
+  "telemetry": {
+    "all_average_gpu_utilization_at_least_75_percent": true,
+    "jobs_expected": 19,
+    "jobs_found": 19,
+    "mean_average_gpu_utilization_percent": 94.03323139089892,
+    "minimum_average_gpu_utilization_percent": 81.42105263157895
+  },
+  "validated_rows": 12520
+}

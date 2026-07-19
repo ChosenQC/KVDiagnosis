@@ -1,161 +1,144 @@
 {
-  "context_demand": {
-    "dataset": "RULER-8K selected failures",
-    "dimensions": [
-      "evidence_presence",
-      "cue_integrity",
-      "long_range_retrieval",
-      "exact_token_fidelity",
-      "answer_format_alignment",
-      "logit_stability_demand",
-      "attention_accessibility_demand"
-    ],
-    "rows": 6351,
-    "unique_samples": 968
+  "attention_available": 7038,
+  "created_at_utc": "2026-07-19T10:26:09.234095+00:00",
+  "excluded_invalid_methods": [
+    "PyramidKVPress"
+  ],
+  "failure_signature_counts": {
+    "ambiguous": 397,
+    "conflicting_retained_signals": 1556,
+    "decode_scorer_candidate": 405,
+    "high_coverage_likelihood_drift": 2145,
+    "low_ear_candidate": 104,
+    "low_slot_coverage": 5047,
+    "partial_slot_coverage": 2866
   },
-  "created_at_utc": "2026-07-17T21:56:24.787639+00:00",
   "files": [
     {
-      "bytes": 27966737,
-      "path": "data/processed/selected_failures/all_selected_failures.jsonl",
-      "rows": 13163,
-      "sha256": "eb7bf361e21b66e649833d18f9fa3fcc1f50246706c92b0aea7ad1e21ce33059"
+      "bytes": 853,
+      "path": "data/README.md",
+      "rows": null,
+      "sha256": "d2573721a9debd9fe5d2fbc0733f0659ee188819a2c3c0ce278d1e610db8d082"
     },
     {
-      "bytes": 7435,
-      "path": "data/processed/selected_failures/longbench_v2_proxy90.jsonl",
-      "rows": 5,
-      "sha256": "1c1e8475c627aa4de4feead9da11b264f9d0a2a639c494ce647523dbe6ab50df"
+      "bytes": 1042,
+      "path": "data/audits/slot_ecov_execution_audit.json",
+      "rows": null,
+      "sha256": "6d00ab78f0d9f79caac4369d44d1e90527ab78bdca7b59f1147886e3ff528435"
     },
     {
-      "bytes": 2574519,
-      "path": "data/processed/selected_failures/qasper_hotpot.jsonl",
-      "rows": 1204,
-      "sha256": "7b1f1b9e337d4ea24e11fc18bd47a8dfa83b17a4f90f031f0942745dc2fa572a"
-    },
-    {
-      "bytes": 11958370,
-      "path": "data/processed/selected_failures/ruler16k.jsonl",
-      "rows": 5603,
-      "sha256": "4f022b1106dded8fc6a32c9a2433782ed28fcae67a2503aad7d9e8efeeda4135"
-    },
-    {
-      "bytes": 13426413,
-      "path": "data/processed/selected_failures/ruler8k.jsonl",
-      "rows": 6351,
-      "sha256": "8a0c7eb3caf7b0385cbb62f520e55cfcb3aac3cd1330d3bef6e7f997efccfdf8"
-    },
-    {
-      "bytes": 3226527,
+      "bytes": 3949437,
       "path": "data/context_demand/ruler8k_context_demand_dataset.csv",
-      "rows": 6352,
-      "sha256": "aa9d302e0561bdce65c3e26e874f9fdb1b96c579921415620ae0bf5af51b14c5"
+      "rows": 5970,
+      "sha256": "9a38f7e9f621b999dd78e0650386caf7ea161aae08b66c4888dfe5d63bbd5550"
     },
     {
-      "bytes": 10479834,
+      "bytes": 11633077,
       "path": "data/context_demand/ruler8k_context_demand_dataset.jsonl",
-      "rows": 6351,
-      "sha256": "fa68270ba409998d662c41091d3ed38227d2bd81a9218409f4d765813c20b9f2"
+      "rows": 5970,
+      "sha256": "de93112844cdba61c43949abc6c7a6efc3db6deade1a2a8bfa5c03c6c905afff"
     },
     {
-      "bytes": 1903,
+      "bytes": 259,
       "path": "data/context_demand/summary.json",
       "rows": null,
-      "sha256": "213cccb33db10987f96d79b989162185e569ed36b7525cb9d25e54773d59fe98"
+      "sha256": "11dd57b3d07204608e491c10eb4810b1ff662c8ab866382d5d1151c02f699b5c"
     },
     {
-      "bytes": 1715,
+      "bytes": 259,
       "path": "data/context_demand/validation_report.json",
       "rows": null,
-      "sha256": "9910f753c51337ad52173895fe868275f06e65a4abb934b953345351507cf4f3"
+      "sha256": "f356e7165a5ba28c4401a43825a8dee7c431a619d0d633d49618b0a9061e4c26"
     },
     {
-      "bytes": 12876,
-      "path": "data/summaries/completed_failure_summary.csv",
-      "rows": 109,
-      "sha256": "d90c09bd0d09081bd18c5860af93eb0724bacbf28a319a3d213f233dc944c54a"
-    },
-    {
-      "bytes": 61752,
-      "path": "data/summaries/completed_failure_summary.json",
-      "rows": null,
-      "sha256": "e8bb3f7d57495c91eaeb93336d4e2b95b534732a8c82f20c67880eebcc84740e"
-    },
-    {
-      "bytes": 2685,
-      "path": "data/summaries/longbench_v2_proxy90_summary_by_family_budget.csv",
-      "rows": 28,
-      "sha256": "e810e02f6d378c37c13347aca0e9b7a7972256f14dc3d3405af9575ad6ecab03"
-    },
-    {
-      "bytes": 2994,
-      "path": "data/summaries/longbench_v2_proxy90_summary_by_task_method_budget.csv",
-      "rows": 28,
-      "sha256": "3e80dc954bd94ae57ca027a65b3ff8470c05d43d673f1ac65fb5baf2282c7e4b"
-    },
-    {
-      "bytes": 1464,
-      "path": "data/summaries/qasper_hotpot_failure_profiles.csv",
-      "rows": 28,
-      "sha256": "85375c29d99698f0c558feaa180a70c900ae60bab7c1216381dca8bf54b81347"
-    },
-    {
-      "bytes": 7462,
-      "path": "data/summaries/qasper_hotpot_summary_by_family_budget.csv",
-      "rows": 55,
-      "sha256": "66c56dc2e50885b4ec639387335f6a77d117aab7f800724f926427c9d4b3724f"
-    },
-    {
-      "bytes": 7715,
-      "path": "data/summaries/qasper_hotpot_summary_by_task_method_budget.csv",
-      "rows": 55,
-      "sha256": "22d3d30ef6aae0b76a3bcd28e47d0871c2f208c21225c4a670b6d08aae631d12"
-    },
-    {
-      "bytes": 25377,
-      "path": "data/summaries/ruler16k_summary_by_family_budget.csv",
-      "rows": 190,
-      "sha256": "5a03fb27cb84c48a982aa1c4a3b9d6b49f336e4c33d1613b85cc4b08f6dbd992"
-    },
-    {
-      "bytes": 40585,
-      "path": "data/summaries/ruler16k_summary_by_task_method_budget.csv",
-      "rows": 298,
-      "sha256": "ed0586e38ccc4b9f891d1885594dbf0a2b3cd4dee5be4849a39b6e8b7fe9fef8"
-    },
-    {
-      "bytes": 25551,
-      "path": "data/summaries/ruler8k_summary_by_family_budget.csv",
-      "rows": 190,
-      "sha256": "4ce968dbbedc993e5aeef0e6fc43b18f6dfa076316bbc41c89667718c570b980"
-    },
-    {
-      "bytes": 40766,
-      "path": "data/summaries/ruler8k_summary_by_task_method_budget.csv",
-      "rows": 298,
-      "sha256": "95e4951b808dde506b63f7750bfe2f582eac0390812c480075ef7fe2897ea643"
-    },
-    {
-      "bytes": 10278,
-      "path": "data/summaries/selected_failures_by_dataset_method_budget.csv",
-      "rows": 84,
-      "sha256": "64161c51cca60bb3bdbcec936c40ab60b2b559ab283d3332d29e2608426b1459"
-    },
-    {
-      "bytes": 100111,
+      "bytes": 65315,
       "path": "data/examples/selected_failures_sample.jsonl",
       "rows": 30,
-      "sha256": "07de6a0f24399cddfc7cbdee3037a224f932536396de2fbe79b5e5bc83bddb7c"
+      "sha256": "0f0314b4d8515007d31e6378413f9bdeb5e2de7bb1d92066175d09e83d2a56b8"
+    },
+    {
+      "bytes": 28313521,
+      "path": "data/processed/selected_failures/all_selected_failures.jsonl",
+      "rows": 12520,
+      "sha256": "3189f8405a6776222f4cf92fcd3a0d58be0af813b8447839d25e6681f5bf609a"
+    },
+    {
+      "bytes": 1739276,
+      "path": "data/processed/selected_failures/hotpotqa.jsonl",
+      "rows": 827,
+      "sha256": "6b1c51e3339ea0bfec14b4d69d66a2662a84a17bf1a7c6c17c0c693aa3430a76"
+    },
+    {
+      "bytes": 922934,
+      "path": "data/processed/selected_failures/qasper.jsonl",
+      "rows": 327,
+      "sha256": "1b04d69a6ed6fecfee7be79d2fd040ad8b432b3b99f172beadd00638bdf40469"
+    },
+    {
+      "bytes": 11973294,
+      "path": "data/processed/selected_failures/ruler16k.jsonl",
+      "rows": 5396,
+      "sha256": "4bfa7078daebb440e3c5f1444a807e01173eb3421b393151760ce6f2a97f8e00"
+    },
+    {
+      "bytes": 13678017,
+      "path": "data/processed/selected_failures/ruler8k.jsonl",
+      "rows": 5970,
+      "sha256": "8d47facd25cc1f2a049aaf4f844c71e3a182aa0a98de9051213c5de3419ef375"
+    },
+    {
+      "bytes": 1171,
+      "path": "data/summaries/failure_signature_totals.json",
+      "rows": null,
+      "sha256": "8f0157dcc8a10a4022600c2768b1d232df70481c3a5f2cf8910b68be46615486"
+    },
+    {
+      "bytes": 5092,
+      "path": "data/summaries/failure_signatures_by_dataset_method_budget.csv",
+      "rows": 90,
+      "sha256": "42d7147339cc2e9449cfe6de83bab2a0c23cd3669c63c9412b9f60e599aa9882"
+    },
+    {
+      "bytes": 42531,
+      "path": "data/summaries/matched_method_pair_summary.csv",
+      "rows": 286,
+      "sha256": "57d08173805390b17cde790f6c6ea87c37b7c94dde8c5f0dd029abd020ea960c"
+    },
+    {
+      "bytes": 21911,
+      "path": "data/summaries/selected_failures_by_dataset_method_budget.csv",
+      "rows": 90,
+      "sha256": "eaea39ec2cfeb3eb03516ca6b05c7480a470a8e1879c7b8c96a509818a0f7a22"
+    },
+    {
+      "bytes": 12535,
+      "path": "data/summaries/slot_ecov_summary.csv",
+      "rows": 90,
+      "sha256": "77ede37960dbdbff45248d54b38d690334240daa24e865e0b16a2eae77acf146"
     }
   ],
+  "methods": [
+    "StreamingLLMPress",
+    "SnapKVPress",
+    "TOVAPress",
+    "KeyDiffPress",
+    "ThinKPress",
+    "ChunkKVPress_Knorm",
+    "AdaKVPress",
+    "QuantizedCache"
+  ],
+  "model": "Qwen/Qwen3-8B",
+  "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
   "name": "KVCacheBench public artifacts",
+  "retention_metric_schema": "kvbench.slot_ecov.v1",
+  "schema_version": "kvcachebench.public_artifact.v0.2",
   "selected_failure_counts": {
-    "all": 13163,
-    "longbench_v2_proxy90": 5,
-    "qasper_hotpot": 1204,
-    "ruler16k": 5603,
-    "ruler8k": 6351
+    "all": 12520,
+    "hotpotqa": 827,
+    "qasper": 327,
+    "ruler16k": 5396,
+    "ruler8k": 5970
   },
-  "selected_failure_definition": "FullCache correct and compressed-cache run incorrect for the same sample, model, prompt, tokenizer, and decoding setup.",
-  "source_workspace": "/mnt/data/u/qiuc/KVbench"
+  "selected_failure_definition": "full_correct == true and compressed_correct == false",
+  "topk_available": 8400
 }

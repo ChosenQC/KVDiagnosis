@@ -4,8 +4,8 @@ message: "If you use KVCacheBench, please cite the benchmark paper and the under
 type: software
 authors:
   - name: KVCacheBench authors
-version: 0.1.0
-date-released: 2026-07-17
+version: 0.2.0
+date-released: 2026-07-19
 repository-code: "https://github.com/REPLACE_WITH_OWNER/KVCacheBench"
 keywords:
   - KV cache compression

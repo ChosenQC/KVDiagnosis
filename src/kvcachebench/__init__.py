@@ -1,5 +1,7 @@
 """KVCacheBench: failure-focused diagnostics for KV cache compression."""
 
-__version__ = "0.1.0"
+from .retention import slot_retention_metrics
 
-__all__ = ["__version__"]
+__version__ = "0.2.0"
+
+__all__ = ["__version__", "slot_retention_metrics"]

@@ -4,19 +4,15 @@ from typing import Any
 
 
 METHODS = [
-    ("RandomPress", "random_baseline"),
     ("StreamingLLMPress", "recency_attention_sink_pruning"),
     ("SnapKVPress", "attention_observation_pruning"),
     ("TOVAPress", "last_query_attention_pruning"),
-    ("PyramidKVPress", "budget_allocation_hierarchical"),
-    ("QFilterPress", "query_aware_qk_geometry"),
     ("KeyDiffPress", "key_space_signal_pruning"),
     ("ThinKPress", "key_channel_pruning"),
-    ("AdaKVPress", "adaptive_headwise_pruning"),
     ("ChunkKVPress_Knorm", "chunk_semantic_preservation"),
+    ("AdaKVPress", "adaptive_headwise_pruning"),
     ("QuantizedCache", "hf_kv_cache_quantization"),
 ]
-
 TASKS = {
     "niah_single_1": "ruler_single_niah",
     "niah_single_2": "ruler_single_niah",
@@ -66,9 +62,10 @@ REQUIRED_FIELDS = [
     "full_correct",
     "compressed_correct",
     "CIF",
-    "ERR",
-    "ECov",
-    "DRR",
+    "ERR_slot",
+    "ECov_slot",
+    "retention_semantics",
+    "failure_signature",
     "full_gold_NLL",
     "compressed_gold_NLL",
     "delta_NLL",

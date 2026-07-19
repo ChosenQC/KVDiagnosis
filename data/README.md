@@ -1,13 +1,19 @@
 # KVCacheBench Data
 
-This directory contains compact public artifacts for the benchmark paper.
+This directory contains the compact public artifact aligned with the final
+slot-level paper analysis.
 
-- `processed/selected_failures`: final FullCache-correct/compressed-wrong rows.
-- `context_demand`: RULER-8K context-demand labels and validation report.
-- `summaries`: aggregate CSV/JSON tables used by paper analyses.
-- `examples`: small JSONL files for quick tests and tutorials.
-- `metadata/artifact_manifest.json`: row counts, checksums, and provenance.
+- `processed/selected_failures`: 12,520 audited FullCache-correct /
+  compressed-wrong method-ratio rows.
+- `context_demand`: 5,970 RULER-8K rows with deterministic demand labels and
+  corrected slot metrics.
+- `summaries`: method/budget slot coverage, failure signatures, and matched
+  failure-set comparisons.
+- `audits`: sanitized completeness and GPU-utilization validation.
+- `examples`: a small multi-method JSONL sample.
+- `metadata/artifact_manifest.json`: provenance, counts, bytes, and SHA-256
+  hashes for every public data file.
 
-Full raw benchmark prompts and per-unit run files are intentionally not stored
-here. They are large and are better regenerated from the official benchmark
-sources using the documented scripts.
+Full prompts, model weights, raw source datasets, per-unit retained-position
+maps, and scheduler logs are intentionally excluded. Regeneration instructions
+are in `docs/reproduction.md`.

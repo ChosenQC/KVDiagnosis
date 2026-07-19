@@ -3,35 +3,64 @@
 ## Selected Failure Rows
 
 Each row in `data/processed/selected_failures/*.jsonl` is a paired
-FullCache/compressed-cache comparison. Important fields:
+FullCache/compressed comparison selected only when:
 
-- `dataset`: one of `ruler8k`, `ruler16k`, `longbench_v2_proxy90`, `qasper_hotpot`.
-- `sample_id`: benchmark-local sample identifier.
-- `method_name`: implementation identifier, e.g. `StreamingLLMPress`.
-- `compression_ratio`: fraction removed by the method implementation.
-- `retained_budget`: reported retained KV fraction, equal to `1 - compression_ratio` for retention methods.
-- `full_correct`, `compressed_correct`: paired correctness values.
-- `ERR`, `ECov`, `DRR`: evidence retention / coverage / distractor diagnostics when applicable.
-- `delta_NLL`, `GPR`: logit-level answer likelihood diagnostics.
-- `metric_applicability_notes`: method-specific notes for N/A values.
+```text
+full_correct == true and compressed_correct == false
+```
 
-Rows are selected only when `full_correct` is true and `compressed_correct` is
-false. N/A metrics are explicit JSON objects of the form
-`{ "value": "N/A", "reason": "..." }`.
+Identity and execution fields include:
+
+- `dataset`: `ruler8k`, `ruler16k`, `qasper`, or `hotpotqa`.
+- `sample_id`, `prompt_hash`: stable benchmark-local identifiers.
+- `method_name`, `method_family`, `method_display`.
+- `compression_ratio`, `retained_budget`: method configuration values.
+- `model_id`, `model_revision`, paired run IDs and task metadata.
+- paired raw/extracted outputs, references, scores, and correctness.
+
+Diagnostic fields include:
+
+- `retention_metric_schema = "kvbench.slot_ecov.v1"`
+- `ERR_slot`, `ECov_slot`, `ECov_slot_threshold`
+- `retention_semantics`
+- `delta_NLL`, `GPR`, `KL`, `TopK`, `EAR`, `gold_rank_shift`
+- `attention_available`, `topk_available`
+- `failure_signature`, `primitive_flags`
+
+Unavailable optional metrics are JSON `null`. The availability booleans state
+whether a missing attention or TopK value is semantically unavailable. Legacy
+cross-slot-union `ERR`, `ECov`, and `DRR` are intentionally absent.
+
+The unique row key is:
+
+```text
+(dataset, sample_id, method_name, compression_ratio)
+```
 
 ## Context-Demand Rows
 
-`data/context_demand/ruler8k_context_demand_dataset.jsonl` adds RULER-8K
-demand labels to selected failure rows. The released dimensions are:
+`data/context_demand/ruler8k_context_demand_dataset.jsonl` joins the 5,970
+audited RULER-8K rows with deterministic task-template labels:
 
-- `evidence_presence`
-- `cue_integrity`
-- `long_range_retrieval`
-- `exact_token_fidelity`
-- `answer_format_alignment`
-- `logit_stability_demand`
-- `attention_accessibility_demand`
+- evidence presence
+- cue integrity
+- long-range retrieval
+- exact-token fidelity
+- answer-format alignment
+- logit stability demand
+- attention accessibility demand
 
-These labels describe what the input sample requires. They are intentionally
-separated from measured compression diagnostics such as ERR, EAR, and
-delta-NLL.
+The file uses `ERR_slot_value` and `ECov_slot_value`. EAR and attention
+demand are unavailable for methods without a valid eager-attention replay.
+
+## Summaries and Audits
+
+- `slot_ecov_summary.csv`: method/dataset/KV-ratio slot coverage means.
+- `failure_signatures_by_dataset_method_budget.csv`: operational signature
+  counts by cell.
+- `failure_signature_totals.json`: frozen thresholds and total counts.
+- `matched_method_pair_summary.csv`: matched-source failure overlap.
+- `slot_ecov_execution_audit.json`: expected/completed keys and GPU telemetry
+  gate summary.
+- `artifact_manifest.json`: byte size, row count, and SHA-256 for every public
+  data file.

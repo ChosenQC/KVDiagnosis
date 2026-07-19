@@ -1,0 +1,34 @@
+{
+  "attention_available": 7038,
+  "counts": {
+    "ambiguous": 397,
+    "conflicting_retained_signals": 1556,
+    "decode_scorer_candidate": 405,
+    "high_coverage_likelihood_drift": 2145,
+    "low_ear_candidate": 104,
+    "low_slot_coverage": 5047,
+    "partial_slot_coverage": 2866
+  },
+  "failure_rows": 12520,
+  "interpretation": "Operational row-weighted signatures, not causal classes or deployment prevalence.",
+  "percent": {
+    "ambiguous": 0.03170926517571885,
+    "conflicting_retained_signals": 0.1242811501597444,
+    "decode_scorer_candidate": 0.032348242811501594,
+    "high_coverage_likelihood_drift": 0.1713258785942492,
+    "low_ear_candidate": 0.008306709265175719,
+    "low_slot_coverage": 0.4031150159744409,
+    "partial_slot_coverage": 0.22891373801916934
+  },
+  "schema_version": "kvcachebench.failure_signatures.v0.2",
+  "thresholds": {
+    "ECov_slot_span_fraction": 0.5,
+    "high_slot_coverage_at_least": 0.9,
+    "likelihood_drift_delta_NLL_at_least": 1.0,
+    "low_EAR_below": 0.5,
+    "low_slot_coverage_below": 0.5,
+    "stable_TopK_at_least_when_available": 0.9,
+    "stable_abs_delta_NLL_at_most": 0.1
+  },
+  "topk_available": 8400
+}
