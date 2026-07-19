@@ -1,10 +1,21 @@
-# KVCacheBench
+<div align="center">
+  <img src="assets/kvdiagnosis-logo.png" width="180" alt="KVDiagnosis logo">
+  <h1>KVDiagnosis</h1>
+  <p><strong>Diagnosing evidence retention and prediction drift in KV cache compression</strong></p>
+  <p>
+    <a href="https://github.com/ChosenQC/KVDiagnosis/actions/workflows/ci.yml"><img src="https://github.com/ChosenQC/KVDiagnosis/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+    <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB" alt="Python 3.10+">
+    <img src="https://img.shields.io/badge/diagnostic_rows-12%2C520-159A9C" alt="12,520 diagnostic rows">
+    <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-3A4149" alt="MIT license"></a>
+  </p>
+</div>
 
-KVCacheBench is a failure-focused benchmark and public artifact for diagnosing
-KV cache compression in long-context language models. It first evaluates every
-supported method-ratio cell on the complete source population. It then selects
-paired rows where FullCache is correct and compression is wrong (C->W) and
-joins cache, logit, attention, and decode-local diagnostics for those failures.
+KVDiagnosis is the public home of **KVCacheBench**, a failure-focused benchmark
+for diagnosing KV cache compression in long-context language models. It first
+evaluates every supported method-ratio cell on the complete source population.
+It then selects paired rows where FullCache is correct and compression is wrong
+(C->W), and joins cache, logit, attention, and decode-local diagnostics for
+those failures.
 
 This repository contains the clean public package aligned with the paper's
 final slot-level analysis:
@@ -21,6 +32,31 @@ final slot-level analysis:
 
 PyramidKV is excluded because its adapter failed the ownership/implementation
 audit. QFilter and Random are not part of the released experimental matrix.
+
+## Diagnostic Protocol
+
+<p align="center">
+  <img src="assets/method-overview.png" width="100%" alt="The two-layer KVDiagnosis protocol">
+</p>
+
+The protocol separates **how often compression fails** from **what changed
+inside a failure**. Layer 1 measures endpoint quality on the full population.
+Layer 2 is applied only after each method-ratio cell materializes its own C->W
+view, keeping own failure sets distinct from matched intersections.
+
+## Main Results
+
+<p align="center">
+  <img src="assets/main-results.png" width="100%" alt="KVDiagnosis main experimental results">
+</p>
+
+The main audit shows four recurring patterns: C->W failures grow rapidly as the
+configured KV ratio tightens; slot-wise evidence coverage varies sharply across
+methods; high position coverage does not guarantee stable gold-answer
+likelihood; and different compressors often fail on different source examples.
+Stars mark ThinK and QuantizedCache, where token positions are structurally
+preserved rather than selected. The 75/50/25 settings are mechanism-specific
+ratios, not byte-equivalent memory budgets.
 
 ## Quick Start
 
