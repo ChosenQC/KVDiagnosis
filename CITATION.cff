@@ -6,7 +6,7 @@ authors:
   - name: KVCacheBench authors
 version: 0.2.0
 date-released: 2026-07-19
-repository-code: "https://github.com/REPLACE_WITH_OWNER/KVCacheBench"
+repository-code: "https://github.com/ChosenQC/KVDiagnosis"
 keywords:
   - KV cache compression
   - long-context LLMs

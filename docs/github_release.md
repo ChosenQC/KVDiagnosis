@@ -26,11 +26,11 @@ and absence of deprecated PyramidKV/legacy-union artifacts.
 
 ## Push To GitHub
 
-This local checkout currently has no configured `origin`. Create an empty
-GitHub repository, then run:
+The public GitHub repository is
+<https://github.com/ChosenQC/KVDiagnosis>. Configure and push with:
 
 ```bash
-scripts/push_to_github.sh git@github.com:OWNER/KVCacheBench.git
+scripts/push_to_github.sh git@github.com:ChosenQC/KVDiagnosis.git
 ```
 
 Do not commit tokens, SSH keys, model checkpoints, raw benchmark dumps, Slurm
@@ -38,7 +38,6 @@ logs, or per-unit `.done.json` files.
 
 ## After Push
 
-- Replace `REPLACE_WITH_OWNER` in `CITATION.cff`.
 - Confirm GitHub Actions passes.
 - Add the immutable repository/release URL to the paper artifact statement.
 - Tag the paper artifact, for example `v0.2.0-paper-artifact`.
