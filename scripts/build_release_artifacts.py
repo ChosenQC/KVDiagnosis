@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import hashlib
 import json
 import sys
@@ -30,6 +31,15 @@ EXPECTED_SIGNATURES = {
     "decode_scorer_candidate": 405,
     "conflicting_retained_signals": 1556,
     "ambiguous": 397,
+}
+
+EXPECTED_FULL_POPULATION = {
+    "source_count": 2600,
+    "planned_compressed_runs": 62400,
+    "supported_compressed_runs": 59800,
+    "unsupported_compressed_runs": 2600,
+    "fullcache_correct_eligible_pairs": 48898,
+    "selected_C_to_W_rows": 12520,
 }
 
 MODEL_REVISION = "b968826d9c46dd6066d109eabc6255188de91218"
@@ -297,7 +307,10 @@ def sanitize_execution_audit(source: Path, output: Path) -> None:
 def file_record(root: Path, path: Path) -> dict[str, Any]:
     rel = path.relative_to(root).as_posix()
     rows: int | None = None
-    if path.suffix == ".jsonl":
+    if path.name.endswith(".jsonl.gz"):
+        with gzip.open(path, mode="rt", encoding="utf-8") as handle:
+            rows = sum(1 for line in handle if line.strip())
+    elif path.suffix == ".jsonl":
         with path.open(encoding="utf-8") as handle:
             rows = sum(1 for line in handle if line.strip())
     elif path.suffix == ".csv":
@@ -320,7 +333,7 @@ def build_manifest(root: Path, validation: dict[str, Any]) -> None:
         if path.is_file() and path != manifest_path
     ]
     manifest = {
-        "schema_version": "kvcachebench.public_artifact.v0.2",
+        "schema_version": "kvcachebench.public_artifact.v0.3",
         "name": "KVCacheBench public artifacts",
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "model": "Qwen/Qwen3-8B",
@@ -328,6 +341,7 @@ def build_manifest(root: Path, validation: dict[str, Any]) -> None:
         "retention_metric_schema": "kvbench.slot_ecov.v1",
         "selected_failure_definition": "full_correct == true and compressed_correct == false",
         "selected_failure_counts": EXPECTED_DATASETS,
+        "full_population_counts": EXPECTED_FULL_POPULATION,
         "failure_signature_counts": EXPECTED_SIGNATURES,
         "attention_available": validation["attention_available"],
         "topk_available": validation["topk_available"],

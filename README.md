@@ -5,6 +5,7 @@
   <p>
     <a href="https://github.com/ChosenQC/KVDiagnosis/actions/workflows/ci.yml"><img src="https://github.com/ChosenQC/KVDiagnosis/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
     <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB" alt="Python 3.10+">
+    <img src="https://img.shields.io/badge/supported_runs-59%2C800-2F6F8F" alt="59,800 supported runs">
     <img src="https://img.shields.io/badge/diagnostic_rows-12%2C520-159A9C" alt="12,520 diagnostic rows">
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-3A4149" alt="MIT license"></a>
   </p>
@@ -20,6 +21,8 @@ those failures.
 This repository contains the clean public package aligned with the paper's
 final slot-level analysis:
 
+- a complete normalized ledger with 2,600 FullCache controls and 62,400
+  method-setting records (59,800 supported and 2,600 explicit N/A);
 - 12,520 audited C->W method-ratio rows from RULER-8K, RULER-16K, Qasper,
   and HotpotQA;
 - eight valid compression methods at configured 75%, 50%, and 25% KV ratio
@@ -101,6 +104,9 @@ kvcachebench summarize \
   --output /tmp/kvbench_summary.csv
 
 python scripts/check_release.py
+
+python scripts/regenerate_paper_artifacts.py \
+  --output-dir paper_artifacts/generated
 ```
 
 Expected selected-failure counts:
@@ -140,6 +146,10 @@ compression, and quantization methods.
 
 ```text
 data/
+  processed/full_population/
+    fullcache.jsonl.gz
+    compressed_runs/{ruler8k,ruler16k,qasper,hotpotqa}.jsonl.gz
+    summary.json
   processed/selected_failures/
     all_selected_failures.jsonl
     ruler8k.jsonl
@@ -160,11 +170,15 @@ data/
     slot_ecov_execution_audit.json
   metadata/
     artifact_manifest.json
+paper_artifacts/generated/
+  run_accounting.json
+  full_evaluation_results.csv
+  pooled_population_outcomes.csv
+  failure_views.csv
+  diagnostic_profiles.csv
+  qa_signature_counts.csv
+  {population-outcomes,failure-views,diagnostic-profiles,qa-transfer}.{pdf,png}
 ```
-
-Full benchmark prompts, checkpoints, per-unit retained-position maps, Slurm
-logs, and private caches are intentionally excluded. Prompt construction is
-reproducible from the upstream RULER, Qasper, and HotpotQA sources.
 
 ## Environment and Provenance
 
@@ -174,7 +188,8 @@ The paper experiments use Qwen3-8B at immutable model revision
 QuantizedCache. The exact research environment is in
 `requirements/requirements_current_experiment.txt`.
 
-The execution audit validates all 12,520 expected keys with zero missing,
-unexpected, or failed rows. All 19 accepted GPU jobs meet the 75% average
-utilization gate. See `docs/reproduction.md` for regeneration commands and
-`docs/metrics.md` for metric applicability.
+The release gate validates all 62,400 planned method-setting keys and confirms
+that the ledger's 12,520 C->W keys exactly equal the diagnostic corpus. All 19
+accepted diagnostic jobs meet the 75% average utilization gate. See
+`docs/reproduction.md` for regeneration commands and `docs/metrics.md` for
+metric applicability.

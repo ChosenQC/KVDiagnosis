@@ -1,5 +1,26 @@
 # Data Format
 
+## Full-Population Ledger
+
+`data/processed/full_population` is normalized around the shared FullCache
+control:
+
+- `fullcache.jsonl.gz` contains one FullCache record for each of 2,600 sources.
+- `compressed_runs/*.jsonl.gz` contains all 62,400 planned method-setting
+  records: 59,800 supported runs and 2,600 explicit ThinK/25% N/A records.
+- `summary.json` records dataset counts and the four outcome transitions.
+
+Each compressed row links to `fullcache_key` and records its method, configured
+ratio, output, score, correctness, support status, and transition. The unique
+compressed-run key is:
+
+```text
+(dataset, sample_id, method_name, retained_budget)
+```
+
+The release checker verifies that all supported C->W keys in this ledger equal
+the 12,520 selected diagnostic rows exactly.
+
 ## Selected Failure Rows
 
 Each row in `data/processed/selected_failures/*.jsonl` is a paired

@@ -1,8 +1,10 @@
 # KVCacheBench Data
 
-This directory contains the compact public artifact aligned with the final
-slot-level paper analysis.
+This directory contains the public artifact aligned with the final slot-level
+paper analysis.
 
+- `processed/full_population`: 2,600 normalized FullCache controls and all
+  62,400 planned method-setting records, including 2,600 explicit N/A rows.
 - `processed/selected_failures`: 12,520 audited FullCache-correct /
   compressed-wrong method-ratio rows.
 - `context_demand`: 5,970 RULER-8K rows with deterministic demand labels and
@@ -14,6 +16,4 @@ slot-level paper analysis.
 - `metadata/artifact_manifest.json`: provenance, counts, bytes, and SHA-256
   hashes for every public data file.
 
-Full prompts, model weights, raw source datasets, per-unit retained-position
-maps, and scheduler logs are intentionally excluded. Regeneration instructions
-are in `docs/reproduction.md`.
+Regeneration instructions are in `docs/reproduction.md`.

@@ -1,0 +1,11 @@
+dataset,dataset_display,failure_signature,signature_display,rows,share_percent
+qasper,Qasper,low_slot_coverage,Low coverage,167,51.07033639143731
+qasper,Qasper,partial_slot_coverage,Partial coverage,45,13.761467889908257
+qasper,Qasper,high_coverage_likelihood_drift,Likelihood drift,69,21.10091743119266
+qasper,Qasper,decode_scorer_candidate,Decoding/scoring,35,10.703363914373089
+qasper,Qasper,ambiguous,Ambiguous,11,3.363914373088685
+hotpotqa,HotpotQA,low_slot_coverage,Low coverage,399,48.24667472793229
+hotpotqa,HotpotQA,partial_slot_coverage,Partial coverage,136,16.444981862152357
+hotpotqa,HotpotQA,high_coverage_likelihood_drift,Likelihood drift,220,26.60217654171705
+hotpotqa,HotpotQA,decode_scorer_candidate,Decoding/scoring,60,7.255139056831923
+hotpotqa,HotpotQA,ambiguous,Ambiguous,12,1.4510278113663846

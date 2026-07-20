@@ -1,0 +1,70 @@
+{
+  "datasets": {
+    "hotpotqa": {
+      "C_to_W_rows": 827,
+      "fullcache_correct_sources": 148,
+      "planned_runs": 4800,
+      "sources": 200,
+      "supported_runs": 4600,
+      "unsupported_runs": 200
+    },
+    "qasper": {
+      "C_to_W_rows": 327,
+      "fullcache_correct_sources": 59,
+      "planned_runs": 4800,
+      "sources": 200,
+      "supported_runs": 4600,
+      "unsupported_runs": 200
+    },
+    "ruler16k": {
+      "C_to_W_rows": 5396,
+      "fullcache_correct_sources": 951,
+      "planned_runs": 26400,
+      "sources": 1100,
+      "supported_runs": 25300,
+      "unsupported_runs": 1100
+    },
+    "ruler8k": {
+      "C_to_W_rows": 5970,
+      "fullcache_correct_sources": 968,
+      "planned_runs": 26400,
+      "sources": 1100,
+      "supported_runs": 25300,
+      "unsupported_runs": 1100
+    }
+  },
+  "fullcache_correct_eligible_pairs": 48898,
+  "methods": [
+    "StreamingLLMPress",
+    "SnapKVPress",
+    "TOVAPress",
+    "KeyDiffPress",
+    "ThinKPress",
+    "ChunkKVPress_Knorm",
+    "AdaKVPress",
+    "QuantizedCache"
+  ],
+  "model": "Qwen/Qwen3-8B",
+  "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "planned_compressed_runs": 62400,
+  "retained_budgets": [
+    0.75,
+    0.5,
+    0.25
+  ],
+  "schema_version": "kvcachebench.full_population_summary.v1",
+  "selected_C_to_W_rows": 12520,
+  "source_count": 2600,
+  "supported_compressed_runs": 59800,
+  "transitions": {
+    "C->C": 36378,
+    "C->W": 12520,
+    "W->C": 1004,
+    "W->W": 9898
+  },
+  "unsupported_compressed_runs": 2600,
+  "unsupported_setting": {
+    "method": "ThinKPress",
+    "retained_budget": 0.25
+  }
+}

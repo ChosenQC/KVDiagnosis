@@ -20,6 +20,8 @@ jobs:
         run: kvcachebench validate data/processed/selected_failures/all_selected_failures.jsonl
       - name: Regenerate a summary
         run: kvcachebench summarize data/processed/selected_failures/all_selected_failures.jsonl --group-by dataset,method_name,retained_budget --output /tmp/selected_failures_summary.csv
+      - name: Regenerate paper tables from the public ledger
+        run: python scripts/regenerate_paper_artifacts.py --output-dir /tmp/kvcachebench-paper --tables-only
       - name: Run smoke tests without pytest dependency
         run: |
           python - <<'PY'

@@ -12,6 +12,10 @@ python -m venv /tmp/kvcachebench-venv
 
 Expected counts:
 
+- FullCache controls: 2,600
+- planned method-setting records: 62,400
+- supported compressed runs: 59,800
+- explicit unsupported rows: 2,600
 - all selected failures: 12,520
 - RULER-8K: 5,970
 - RULER-16K: 5,396
@@ -21,8 +25,9 @@ Expected counts:
 - valid TopK rows: 8,400
 
 The release gate also verifies all manifest hashes, the immutable model
-revision, 19/19 accepted telemetry jobs, the 75% average GPU-utilization gate,
-and absence of deprecated PyramidKV/legacy-union artifacts.
+revision, exact equality between ledger C->W rows and selected failures, 19/19
+accepted telemetry jobs, the 75% average GPU-utilization gate, and absence of
+deprecated PyramidKV/legacy-union artifacts.
 
 ## Push To GitHub
 
@@ -40,4 +45,4 @@ logs, or per-unit `.done.json` files.
 
 - Confirm GitHub Actions passes.
 - Add the immutable repository/release URL to the paper artifact statement.
-- Tag the paper artifact, for example `v0.2.0-paper-artifact`.
+- Tag the paper artifact, for example `v0.3.0-paper-artifact`.

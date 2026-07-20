@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import re
@@ -40,6 +41,20 @@ EXPECTED_MODEL_REVISION = "b968826d9c46dd6066d109eabc6255188de91218"
 EXPECTED_ATTENTION_AVAILABLE = 7038
 EXPECTED_TOPK_AVAILABLE = 8400
 EXPECTED_CONTEXT_ATTENTION_AVAILABLE = 4608
+EXPECTED_FULL_POPULATION = {
+    "source_count": 2600,
+    "planned_compressed_runs": 62400,
+    "supported_compressed_runs": 59800,
+    "unsupported_compressed_runs": 2600,
+    "fullcache_correct_eligible_pairs": 48898,
+    "selected_C_to_W_rows": 12520,
+}
+EXPECTED_TRANSITIONS = {
+    "C->C": 36378,
+    "C->W": 12520,
+    "W->C": 1004,
+    "W->W": 9898,
+}
 
 DEPRECATED_PATHS = [
     "data/processed/selected_failures/longbench_v2_proxy90.jsonl",
@@ -72,6 +87,9 @@ def scan_secrets(root: Path) -> list[str]:
 
 
 def count_rows(path: Path) -> int | None:
+    if path.name.endswith(".jsonl.gz"):
+        with gzip.open(path, mode="rt", encoding="utf-8") as handle:
+            return sum(1 for line in handle if line.strip())
     if path.suffix == ".jsonl":
         with path.open(encoding="utf-8") as handle:
             return sum(1 for line in handle if line.strip())
@@ -84,7 +102,7 @@ def count_rows(path: Path) -> int | None:
 def verify_manifest(root: Path) -> dict[str, Any]:
     path = root / "data/metadata/artifact_manifest.json"
     manifest = json.loads(path.read_text(encoding="utf-8"))
-    if manifest.get("schema_version") != "kvcachebench.public_artifact.v0.2":
+    if manifest.get("schema_version") != "kvcachebench.public_artifact.v0.3":
         raise SystemExit("unexpected artifact manifest schema")
     if manifest.get("model_revision") != EXPECTED_MODEL_REVISION:
         raise SystemExit("artifact manifest model revision mismatch")
@@ -92,6 +110,8 @@ def verify_manifest(root: Path) -> dict[str, Any]:
         raise SystemExit("artifact manifest selected-failure counts mismatch")
     if manifest.get("failure_signature_counts") != EXPECTED_SIGNATURES:
         raise SystemExit("artifact manifest failure-signature counts mismatch")
+    if manifest.get("full_population_counts") != EXPECTED_FULL_POPULATION:
+        raise SystemExit("artifact manifest full-population counts mismatch")
 
     for record in manifest.get("files", []):
         file_path = root / record["path"]
@@ -116,6 +136,82 @@ def verify_manifest(root: Path) -> dict[str, Any]:
             f"extra={sorted(manifest_paths - actual_paths)}"
         )
     return manifest
+
+
+def iter_jsonl_gz(path: Path):
+    with gzip.open(path, mode="rt", encoding="utf-8") as handle:
+        for line in handle:
+            if line.strip():
+                yield json.loads(line)
+
+
+def verify_full_population(root: Path, selected_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    population_dir = root / "data/processed/full_population"
+    summary = json.loads((population_dir / "summary.json").read_text(encoding="utf-8"))
+    for field, expected in EXPECTED_FULL_POPULATION.items():
+        if summary.get(field) != expected:
+            raise SystemExit(
+                f"full-population {field} mismatch: {summary.get(field)} != {expected}"
+            )
+    if summary.get("transitions") != EXPECTED_TRANSITIONS:
+        raise SystemExit(f"full-population transitions mismatch: {summary.get('transitions')}")
+
+    fullcache = list(iter_jsonl_gz(population_dir / "fullcache.jsonl.gz"))
+    if len(fullcache) != EXPECTED_FULL_POPULATION["source_count"]:
+        raise SystemExit("fullcache ledger row count mismatch")
+    fullcache_keys = {row.get("fullcache_key") for row in fullcache}
+    if len(fullcache_keys) != len(fullcache):
+        raise SystemExit("fullcache ledger contains duplicate keys")
+
+    compressed = []
+    expected_dataset_runs = {
+        "ruler8k": 26400,
+        "ruler16k": 26400,
+        "qasper": 4800,
+        "hotpotqa": 4800,
+    }
+    for dataset, expected in expected_dataset_runs.items():
+        rows = list(
+            iter_jsonl_gz(population_dir / "compressed_runs" / f"{dataset}.jsonl.gz")
+        )
+        if len(rows) != expected or any(row.get("dataset") != dataset for row in rows):
+            raise SystemExit(f"full-population dataset mismatch: {dataset}")
+        compressed.extend(rows)
+    if len(compressed) != EXPECTED_FULL_POPULATION["planned_compressed_runs"]:
+        raise SystemExit("compressed-run ledger row count mismatch")
+    run_keys = {
+        (row.get("dataset"), row.get("sample_id"), row.get("method_name"), row.get("retained_budget"))
+        for row in compressed
+    }
+    if len(run_keys) != len(compressed):
+        raise SystemExit("compressed-run ledger contains duplicate keys")
+    if any(row.get("fullcache_key") not in fullcache_keys for row in compressed):
+        raise SystemExit("compressed-run ledger contains an unknown FullCache key")
+
+    supported = [row for row in compressed if row.get("support_status") == "supported"]
+    unsupported = [row for row in compressed if row.get("support_status") == "unsupported"]
+    if len(supported) != EXPECTED_FULL_POPULATION["supported_compressed_runs"]:
+        raise SystemExit("supported-run count mismatch")
+    if len(unsupported) != EXPECTED_FULL_POPULATION["unsupported_compressed_runs"]:
+        raise SystemExit("unsupported-run count mismatch")
+    if any(
+        row.get("method_name") != "ThinKPress" or row.get("retained_budget") != 0.25
+        for row in unsupported
+    ):
+        raise SystemExit("unsupported ledger contains a non-ThinK/25% row")
+
+    ledger_c_to_w = {
+        (row["dataset"], row["sample_id"], row["method_name"], row["retained_budget"])
+        for row in supported
+        if row.get("outcome_transition") == "C->W"
+    }
+    selected_keys = {
+        (row["dataset"], row["sample_id"], row["method_name"], row["retained_budget"])
+        for row in selected_rows
+    }
+    if ledger_c_to_w != selected_keys:
+        raise SystemExit("selected failures do not equal the ledger C->W population")
+    return summary
 
 
 def main() -> int:
@@ -156,6 +252,8 @@ def main() -> int:
         raise SystemExit(f"unexpected TopK coverage: {report['topk_available']}")
     if {row.get("model_revision") for row in rows} != {EXPECTED_MODEL_REVISION}:
         raise SystemExit("selected rows do not bind to one expected model revision")
+
+    population_summary = verify_full_population(root, rows)
 
     for dataset, expected in expected_datasets.items():
         individual = read_jsonl(data_dir / f"{dataset}.jsonl")
@@ -249,7 +347,9 @@ def main() -> int:
     manifest = verify_manifest(root)
     scripts = [
         root / "scripts/export_selected_failures.py",
+        root / "scripts/build_full_population_ledger.py",
         root / "scripts/build_release_artifacts.py",
+        root / "scripts/regenerate_paper_artifacts.py",
         root / "scripts/check_release.py",
     ]
     run(
@@ -262,6 +362,18 @@ def main() -> int:
         ],
         root,
     )
+    run(
+        [
+            sys.executable,
+            str(root / "scripts/regenerate_paper_artifacts.py"),
+            "--root",
+            str(root),
+            "--output-dir",
+            "/tmp/kvcachebench-paper-artifacts",
+            "--tables-only",
+        ],
+        root,
+    )
     print(
         json.dumps(
             {
@@ -271,6 +383,7 @@ def main() -> int:
                 "failure_signatures": report["failure_signatures"],
                 "attention_available": report["attention_available"],
                 "topk_available": report["topk_available"],
+                "full_population": population_summary,
                 "manifest_files": len(manifest["files"]),
             },
             indent=2,

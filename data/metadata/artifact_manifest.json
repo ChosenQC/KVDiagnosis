@@ -1,6 +1,6 @@
 {
   "attention_available": 7038,
-  "created_at_utc": "2026-07-19T10:26:09.234095+00:00",
+  "created_at_utc": "2026-07-20T08:16:38.885116+00:00",
   "excluded_invalid_methods": [
     "PyramidKVPress"
   ],
@@ -15,10 +15,10 @@
   },
   "files": [
     {
-      "bytes": 853,
+      "bytes": 866,
       "path": "data/README.md",
       "rows": null,
-      "sha256": "d2573721a9debd9fe5d2fbc0733f0659ee188819a2c3c0ce278d1e610db8d082"
+      "sha256": "31a61a452a4b16824a9df6b574f5cb4aabe5593c05afe17fa34f4bb8ddb8876c"
     },
     {
       "bytes": 1042,
@@ -55,6 +55,42 @@
       "path": "data/examples/selected_failures_sample.jsonl",
       "rows": 30,
       "sha256": "0f0314b4d8515007d31e6378413f9bdeb5e2de7bb1d92066175d09e83d2a56b8"
+    },
+    {
+      "bytes": 390822,
+      "path": "data/processed/full_population/compressed_runs/hotpotqa.jsonl.gz",
+      "rows": 4800,
+      "sha256": "0c02262ccaa2cd172f07149f941eb5d77a344f6a234e316a61391ce5f806b820"
+    },
+    {
+      "bytes": 692230,
+      "path": "data/processed/full_population/compressed_runs/qasper.jsonl.gz",
+      "rows": 4800,
+      "sha256": "26d7ba7e81c223f7dd7e0335c63dc577e57fd34a2e160fbd33919e150ded577f"
+    },
+    {
+      "bytes": 2408135,
+      "path": "data/processed/full_population/compressed_runs/ruler16k.jsonl.gz",
+      "rows": 26400,
+      "sha256": "2e92dcb268e071a97a0c79c3d9555bd0a2661ead2adca1478fa0501e7e486e42"
+    },
+    {
+      "bytes": 2400182,
+      "path": "data/processed/full_population/compressed_runs/ruler8k.jsonl.gz",
+      "rows": 26400,
+      "sha256": "76bbd0ca79ef12c6401d2ce1a5d43bd4e9fcd076a7b731b19c7dab51e3f31bfd"
+    },
+    {
+      "bytes": 357203,
+      "path": "data/processed/full_population/fullcache.jsonl.gz",
+      "rows": 2600,
+      "sha256": "57c1fe2f44c6e537be6355d92c7c3d1557b7d36266ad2698db7b45fcb1efbe73"
+    },
+    {
+      "bytes": 1629,
+      "path": "data/processed/full_population/summary.json",
+      "rows": null,
+      "sha256": "93c39142698a297ee7bb0e367430817152125fadb1ca5fdf69e09c80510a216f"
     },
     {
       "bytes": 28313521,
@@ -117,6 +153,14 @@
       "sha256": "77ede37960dbdbff45248d54b38d690334240daa24e865e0b16a2eae77acf146"
     }
   ],
+  "full_population_counts": {
+    "fullcache_correct_eligible_pairs": 48898,
+    "planned_compressed_runs": 62400,
+    "selected_C_to_W_rows": 12520,
+    "source_count": 2600,
+    "supported_compressed_runs": 59800,
+    "unsupported_compressed_runs": 2600
+  },
   "methods": [
     "StreamingLLMPress",
     "SnapKVPress",
@@ -131,7 +175,7 @@
   "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
   "name": "KVCacheBench public artifacts",
   "retention_metric_schema": "kvbench.slot_ecov.v1",
-  "schema_version": "kvcachebench.public_artifact.v0.2",
+  "schema_version": "kvcachebench.public_artifact.v0.3",
   "selected_failure_counts": {
     "all": 12520,
     "hotpotqa": 827,

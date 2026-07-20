@@ -16,13 +16,28 @@ kvcachebench summarize \
   --output /tmp/selected_failures_summary.csv
 
 python scripts/check_release.py
+
+python scripts/regenerate_paper_artifacts.py \
+  --output-dir paper_artifacts/generated
 ```
 
-The release checker validates counts, unique keys, slot metric schema,
-observational signatures, trace coverage, immutable model revision, sanitized
-execution telemetry, file sizes, secret patterns, and every manifest hash.
+The release checker validates the complete population ledger, selected C->W
+identity, unique keys, slot metric schema, observational signatures, trace
+coverage, immutable model revision, sanitized execution telemetry, file sizes,
+secret patterns, every manifest hash, and CPU-only paper-table regeneration.
 
 ## Rebuilding the Public Corpus
+
+Build the normalized complete ledger from the frozen paired run files:
+
+```bash
+python scripts/build_full_population_ledger.py \
+  --results-root /path/to/KVbench/results
+```
+
+The builder requires every source in every method-setting cell, preserves
+ThinK/25% as explicit N/A, and rejects the build unless the resulting C->W key
+set exactly matches the selected diagnostic corpus.
 
 Full internal reruns produce paired metrics plus the frozen
 `failure_regime_rows.csv` audit table. Re-export with:
@@ -51,6 +66,21 @@ python scripts/build_release_artifacts.py \
 
 Run `python scripts/check_release.py` after every rebuild.
 
+## Regenerating Paper Results
+
+Install the analysis extra and regenerate the paper-facing CSVs and four main
+figures directly from the public ledger and selected diagnostic rows:
+
+```bash
+pip install -e '.[analysis]'
+python scripts/regenerate_paper_artifacts.py \
+  --output-dir paper_artifacts/generated \
+  --assets-dir assets
+```
+
+Use `--tables-only` for dependency-free CPU regeneration of all reported
+population, overlap, diagnostic-profile, and QA-signature values.
+
 ## Full Inference Environment
 
 Full reruns require a GPU capable of loading Qwen3-8B. The frozen experiment
@@ -62,7 +92,3 @@ uses:
 - `kvpress==0.5.3` for non-quantized methods;
 - Hugging Face QuantizedCache through the Transformers cache API;
 - the lock in `requirements/requirements_current_experiment.txt`.
-
-Original prompts are regenerated from NVIDIA/RULER, Qasper, and HotpotQA.
-Private model caches, raw source dumps, per-slot retained-position maps, and
-scheduler logs are intentionally excluded from this public repository.
