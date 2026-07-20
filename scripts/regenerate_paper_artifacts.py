@@ -450,8 +450,8 @@ def plot_artifacts(output_dir, assets_dir, pooled, failure_views, diagnostics, q
     save(fig, "diagnostic-profiles")
 
     categories = [label for _, label in QA_SIGNATURES]
-    fig = plt.figure(figsize=(3.35, 2.82), constrained_layout=True)
-    grid = fig.add_gridspec(2, 1, height_ratios=[1.65, 1.05], hspace=0.04)
+    fig = plt.figure(figsize=(7.0, 2.35), constrained_layout=True)
+    grid = fig.add_gridspec(1, 2, width_ratios=[1.0, 1.14], wspace=0.10)
     ax = fig.add_subplot(grid[0])
     ypos = np.arange(len(categories), dtype=float)
     styles = {"qasper": ("#CC79A7", "D", 5.5), "hotpotqa": ("#D55E00", "^", -7.0)}
@@ -470,10 +470,20 @@ def plot_artifacts(output_dir, assets_dir, pooled, failure_views, diagnostics, q
             ax.annotate(str(count), (xvalue, yvalue), xytext=(0, offset), textcoords="offset points", ha="center", va="center", fontsize=6.6)
     ax.set_yticks(ypos, categories)
     ax.invert_yaxis()
-    ax.set_xlim(-1, 56)
+    ax.set_xlim(-2, 56)
     ax.set_xlabel(r"Share of C$\rightarrow$W rows (%)")
     ax.grid(axis="x", color="0.88", linewidth=0.55)
-    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2, frameon=False)
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.set_title(r"$\bf{A}$  Diagnostic categories", loc="left", pad=27)
+    ax.legend(
+        loc="lower left",
+        bbox_to_anchor=(0.0, 1.01),
+        ncol=2,
+        frameon=False,
+        borderaxespad=0,
+        handletextpad=0.45,
+        columnspacing=1.2,
+    )
 
     qasper_case = next(
         row
@@ -493,26 +503,57 @@ def plot_artifacts(output_dir, assets_dir, pooled, failure_views, diagnostics, q
     )
     case_ax = fig.add_subplot(grid[1])
     case_ax.set_xlim(0, 1)
-    case_ax.set_ylim(0, 2)
+    case_ax.set_ylim(0, 1)
     case_ax.axis("off")
-    case_ax.axhspan(1.04, 1.94, color="#F5E8F0", zorder=0)
-    case_ax.axhspan(0.06, 0.96, color="#F8ECE4", zorder=0)
-    case_ax.plot([0.018, 0.018], [1.10, 1.88], color="#CC79A7", linewidth=2.2)
-    case_ax.plot([0.018, 0.018], [0.12, 0.90], color="#D55E00", linewidth=2.2)
-    case_ax.text(0.04, 1.80, "Qasper · ThinK/50% · structural-position drift", fontsize=7.25, fontweight="bold", va="center")
-    case_ax.text(0.04, 1.56, 'ID 000196: "Groningen Meaning Bank" $\\rightarrow$ "The The $\\ldots$"', fontsize=6.85, va="center")
-    case_ax.text(0.04, 1.33, rf"ECov N/A · position addressable · $\Delta$NLL {qasper_case['delta_NLL']:.3f}", fontsize=6.55, va="center", color="0.23")
-    case_ax.text(0.04, 1.12, "Representation fidelity is unknown; likelihood collapses.", fontsize=6.55, va="center", color="0.23")
-    case_ax.text(0.04, 0.82, "HotpotQA · ChunkKV/50% · partial coverage", fontsize=7.25, fontweight="bold", va="center")
-    case_ax.text(0.04, 0.58, rf"ID 000076: FullCache {hotpot_case['extracted_answer_full']} $\rightarrow$ compressed {hotpot_case['extracted_answer_compressed']}", fontsize=6.85, va="center")
-    case_ax.text(0.04, 0.35, rf"ECov {hotpot_case['ECov_slot']:.3f} · $\Delta$NLL {hotpot_case['delta_NLL']:.3f}", fontsize=6.55, va="center", color="0.23")
-    case_ax.text(0.04, 0.14, "Only part of the multi-hop support chain survives.", fontsize=6.55, va="center", color="0.23")
-
-    fig.canvas.draw()
-    case_box = case_ax.get_position()
-    fig.set_layout_engine(None)
-    case_ax.set_in_layout(False)
-    case_ax.set_position([0.02, case_box.y0, 0.96, case_box.height])
+    case_ax.set_title(r"$\bf{B}$  Representative cases", loc="left", pad=27)
+    case_ax.plot([0.018, 0.018], [0.58, 0.94], color="#CC79A7", linewidth=2.4)
+    case_ax.plot([0.018, 0.018], [0.06, 0.42], color="#D55E00", linewidth=2.4)
+    case_ax.text(
+        0.045,
+        0.89,
+        "Qasper | ThinK, 50% | structural drift",
+        fontsize=7.4,
+        fontweight="bold",
+        va="center",
+    )
+    case_ax.text(
+        0.045,
+        0.74,
+        r'FullCache: "Groningen Meaning Bank"  $\rightarrow$  compressed: "The The $\ldots$"',
+        fontsize=7.2,
+        va="center",
+    )
+    case_ax.text(
+        0.045,
+        0.61,
+        rf"ECov N/A; $\Delta$NLL={qasper_case['delta_NLL']:.3f}. Position addressability does not establish fidelity.",
+        fontsize=6.8,
+        va="center",
+        color="0.23",
+    )
+    case_ax.text(
+        0.045,
+        0.37,
+        "HotpotQA | ChunkKV, 50% | partial projected coverage",
+        fontsize=7.4,
+        fontweight="bold",
+        va="center",
+    )
+    case_ax.text(
+        0.045,
+        0.22,
+        rf"FullCache: {hotpot_case['extracted_answer_full']}  $\rightarrow$  compressed: {hotpot_case['extracted_answer_compressed']}",
+        fontsize=7.2,
+        va="center",
+    )
+    case_ax.text(
+        0.045,
+        0.09,
+        rf"ECov={hotpot_case['ECov_slot']:.3f}; $\Delta$NLL={hotpot_case['delta_NLL']:.3f}. Part of the support chain survives.",
+        fontsize=6.8,
+        va="center",
+        color="0.23",
+    )
     save(fig, "qa-transfer")
 
 
