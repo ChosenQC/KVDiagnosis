@@ -1,5 +1,10 @@
 {
   "attention_available": 4608,
+  "coverage_types": {
+    "measured_token_coverage": 3081,
+    "projected_token_coverage": 1043,
+    "structural_position_addressability": 1846
+  },
   "metrics": [
     "ERR_slot",
     "ECov_slot",
@@ -10,6 +15,7 @@
   ],
   "rows": 5970,
   "schema_version": "kvcachebench.context_demand.v0.2",
+  "slot_metrics_available": 4124,
   "topk_available": 5970,
   "unique_samples": 968
 }

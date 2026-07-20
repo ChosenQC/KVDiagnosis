@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the normalized, complete KVCacheBench per-source run ledger."""
+"""Build the normalized, complete KVDiagnosis per-source run ledger."""
 
 from __future__ import annotations
 

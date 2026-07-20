@@ -15,9 +15,16 @@ SELECTED_FAILURE_REQUIRED_FIELDS = [
     "compressed_correct",
     "retention_metric_schema",
     "retention_semantics",
+    "coverage_applicability_schema",
+    "coverage_type",
     "ERR_slot",
+    "ERR_slot_status",
+    "ERR_slot_reason",
     "ECov_slot",
+    "ECov_slot_status",
+    "ECov_slot_reason",
     "ECov_slot_threshold",
+    "structural_position_addressability",
     "failure_signature",
     "attention_available",
     "topk_available",
@@ -40,12 +47,13 @@ NUMERIC_METRICS = [
 ]
 
 FAILURE_SIGNATURES = {
-    "low_slot_coverage",
-    "partial_slot_coverage",
-    "high_coverage_likelihood_drift",
+    "low_mapped_coverage",
+    "partial_mapped_coverage",
+    "high_mapped_coverage_likelihood_drift",
+    "structural_position_likelihood_drift",
     "low_ear_candidate",
     "decode_scorer_candidate",
-    "conflicting_retained_signals",
+    "conflicting_diagnostic_signals",
     "ambiguous",
 }
 
@@ -64,6 +72,24 @@ RETENTION_SEMANTICS = {
     "per_layer_per_kv_head_original_position_mapping",
     "all_positions_structurally_preserved",
 }
+
+COVERAGE_TYPES = {
+    "measured_token_coverage",
+    "projected_token_coverage",
+    "structural_position_addressability",
+    "not_applicable",
+}
+
+MEASURED_COVERAGE_METHODS = {
+    "StreamingLLMPress",
+    "SnapKVPress",
+    "TOVAPress",
+    "KeyDiffPress",
+    "AdaKVPress",
+}
+PROJECTED_COVERAGE_METHODS = {"ChunkKVPress_Knorm"}
+STRUCTURAL_COVERAGE_METHODS = {"ThinKPress", "QuantizedCache"}
+MAPPED_COVERAGE_TYPES = {"measured_token_coverage", "projected_token_coverage"}
 
 
 def is_na(value: Any) -> bool:
@@ -86,11 +112,63 @@ def mean(values: list[Any]) -> float | None:
     return sum(nums) / len(nums) if nums else None
 
 
+def coverage_type_for_method(method_name: str) -> str:
+    if method_name in MEASURED_COVERAGE_METHODS:
+        return "measured_token_coverage"
+    if method_name in PROJECTED_COVERAGE_METHODS:
+        return "projected_token_coverage"
+    if method_name in STRUCTURAL_COVERAGE_METHODS:
+        return "structural_position_addressability"
+    return "not_applicable"
+
+
+def classify_failure_signature(row: dict[str, Any]) -> tuple[str, list[str]]:
+    coverage_type = str(row.get("coverage_type"))
+    ecov = numeric(row.get("ECov_slot"))
+    delta_nll = numeric(row.get("delta_NLL"))
+    ear = numeric(row.get("EAR"))
+    topk = numeric(row.get("TopK"))
+    flags: list[str] = []
+
+    if coverage_type in MAPPED_COVERAGE_TYPES and ecov is not None:
+        if ecov < 0.50:
+            flags.append("low_mapped_coverage")
+        elif ecov < 0.90:
+            flags.append("partial_mapped_coverage")
+        elif delta_nll is not None and delta_nll >= 1.0:
+            flags.append("high_mapped_coverage_likelihood_drift")
+
+    if (
+        coverage_type == "structural_position_addressability"
+        and delta_nll is not None
+        and delta_nll >= 1.0
+    ):
+        flags.append("structural_position_likelihood_drift")
+
+    positions_addressable = coverage_type == "structural_position_addressability" or (
+        coverage_type in MAPPED_COVERAGE_TYPES
+        and ecov is not None
+        and ecov >= 0.90
+    )
+    if positions_addressable and row.get("attention_available") is True and ear is not None and ear < 0.50:
+        flags.append("low_ear_candidate")
+    if positions_addressable and delta_nll is not None and abs(delta_nll) <= 0.10:
+        if row.get("topk_available") is not True or (topk is not None and topk >= 0.90):
+            flags.append("decode_scorer_candidate")
+
+    if not flags:
+        return "ambiguous", flags
+    if len(flags) > 1:
+        return "conflicting_diagnostic_signals", flags
+    return flags[0], flags
+
+
 def validate_selected_failure_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
     errors: list[str] = []
     keys_seen: set[tuple[Any, ...]] = set()
     by_dataset: dict[str, int] = defaultdict(int)
     by_signature: dict[str, int] = defaultdict(int)
+    by_coverage_type: dict[str, int] = defaultdict(int)
 
     for index, row in enumerate(rows, start=1):
         missing = [field for field in SELECTED_FAILURE_REQUIRED_FIELDS if field not in row]
@@ -104,17 +182,52 @@ def validate_selected_failure_rows(rows: list[dict[str, Any]]) -> dict[str, Any]
             errors.append(f"row {index}: method is not in the release set: {row.get('method_name')!r}")
         if row.get("retention_metric_schema") != "kvbench.slot_ecov.v1":
             errors.append(f"row {index}: unexpected retention metric schema")
+        if row.get("coverage_applicability_schema") != "kvdiagnosis.coverage.v2":
+            errors.append(f"row {index}: unexpected coverage applicability schema")
         if row.get("retention_semantics") not in RETENTION_SEMANTICS:
             errors.append(f"row {index}: unexpected retention semantics")
+        coverage_type = str(row.get("coverage_type"))
+        if coverage_type not in COVERAGE_TYPES:
+            errors.append(f"row {index}: unexpected coverage type {coverage_type!r}")
+        expected_coverage_type = coverage_type_for_method(str(row.get("method_name")))
+        if coverage_type != expected_coverage_type:
+            errors.append(
+                f"row {index}: coverage type {coverage_type!r} does not match method; "
+                f"expected {expected_coverage_type!r}"
+            )
         if numeric(row.get("ECov_slot_threshold")) != 0.5:
             errors.append(f"row {index}: ECov_slot_threshold is not 0.5")
-        for field in ("ERR_slot", "ECov_slot"):
-            value = numeric(row.get(field))
-            if value is None or not 0.0 <= value <= 1.0:
-                errors.append(f"row {index}: {field} is not in [0, 1]")
+        if coverage_type in MAPPED_COVERAGE_TYPES:
+            for field in ("ERR_slot", "ECov_slot"):
+                value = numeric(row.get(field))
+                if value is None or not 0.0 <= value <= 1.0:
+                    errors.append(f"row {index}: {field} is not in [0, 1]")
+                if row.get(f"{field}_status") != "available":
+                    errors.append(f"row {index}: {field} is not marked available")
+                if row.get(f"{field}_reason") is not None:
+                    errors.append(f"row {index}: available {field} has an N/A reason")
+            if row.get("structural_position_addressability") is not False:
+                errors.append(f"row {index}: mapped coverage is marked structural")
+        elif coverage_type == "structural_position_addressability":
+            for field in ("ERR_slot", "ECov_slot"):
+                if row.get(field) is not None:
+                    errors.append(f"row {index}: structural {field} must be null")
+                if row.get(f"{field}_status") != "not_applicable":
+                    errors.append(f"row {index}: structural {field} must be N/A")
+                if not str(row.get(f"{field}_reason") or "").startswith("N/A:"):
+                    errors.append(f"row {index}: structural {field} lacks an N/A reason")
+            if row.get("structural_position_addressability") is not True:
+                errors.append(f"row {index}: structural addressability is not true")
         signature = str(row.get("failure_signature"))
         if signature not in FAILURE_SIGNATURES:
             errors.append(f"row {index}: unknown failure signature {signature!r}")
+        expected_signature, expected_flags = classify_failure_signature(row)
+        if signature != expected_signature:
+            errors.append(
+                f"row {index}: failure signature {signature!r} != {expected_signature!r}"
+            )
+        if row.get("primitive_flags") != expected_flags:
+            errors.append(f"row {index}: primitive flags do not match frozen rules")
         if not isinstance(row.get("attention_available"), bool):
             errors.append(f"row {index}: attention_available is not boolean")
         if not isinstance(row.get("topk_available"), bool):
@@ -133,6 +246,7 @@ def validate_selected_failure_rows(rows: list[dict[str, Any]]) -> dict[str, Any]
         keys_seen.add(row_key)
         by_dataset[str(row.get("dataset"))] += 1
         by_signature[signature] += 1
+        by_coverage_type[coverage_type] += 1
 
     return {
         "ok": not errors,
@@ -142,6 +256,7 @@ def validate_selected_failure_rows(rows: list[dict[str, Any]]) -> dict[str, Any]
         ),
         "datasets": dict(sorted(by_dataset.items())),
         "failure_signatures": dict(sorted(by_signature.items())),
+        "coverage_types": dict(sorted(by_coverage_type.items())),
         "attention_available": sum(row.get("attention_available") is True for row in rows),
         "topk_available": sum(row.get("topk_available") is True for row in rows),
         "errors": errors[:50],

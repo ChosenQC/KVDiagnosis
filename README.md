@@ -11,8 +11,8 @@
   </p>
 </div>
 
-KVDiagnosis is the public home of **KVCacheBench**, a failure-focused benchmark
-for diagnosing KV cache compression in long-context language models. It first
+**KVDiagnosis** is a failure-focused benchmark for diagnosing KV cache
+compression in long-context language models. It first
 evaluates every supported method-ratio cell on the complete source population.
 It then selects paired rows where FullCache is correct and compression is wrong
 (C->W), and joins cache, logit, attention, and decode-local diagnostics for
@@ -27,14 +27,21 @@ final slot-level analysis:
   and HotpotQA;
 - eight valid compression methods at configured 75%, 50%, and 25% KV ratio
   settings;
-- per-row layer x KV-head evidence retention, likelihood, attention
-  applicability, and operational failure signatures;
+- per-row layer x KV-head evidence retention, explicit coverage applicability,
+  likelihood, attention, and operational failure signatures;
 - a 5,970-row RULER-8K context-demand view;
 - paper-facing summaries, execution audit, SHA-256 manifest, and release gates;
 - a small dependency-free Python package for validation and aggregation.
 
-PyramidKV is excluded because its adapter failed the ownership/implementation
-audit. QFilter and Random are not part of the released experimental matrix.
+PyramidKV is excluded because its historical adapter failed the implementation
+audit. The tracker replaced PyramidKV's custom compression path with the same
+fixed-budget path used for SnapKV, bypassing its layer-dependent budget. A
+raw-artifact audit found identical retained mappings, outputs, scores, and gold
+NLL in all 7,800 SnapKV/PyramidKV pairs, despite distinct Slurm jobs. The tracker
+is corrected in this repository, but the invalid historical rows remain
+excluded. See
+[`pyramidkv_adapter_audit.json`](data/audits/pyramidkv_adapter_audit.json).
+QFilter and Random are not part of the released experimental matrix.
 
 ## Diagnostic Protocol
 
@@ -74,9 +81,11 @@ most cells shows why each compressor must retain its own failure population.
   <img src="assets/diagnostic-profiles.png" width="82%" alt="Slot-wise evidence coverage and gold-answer likelihood drift">
 </p>
 
-Low or partial slot coverage is common, but high position coverage can coexist
-with severe gold-answer likelihood drift. Stars mark ThinK and QuantizedCache,
-whose token positions are structurally preserved rather than selected.
+Low or partial mapped coverage is common. Among rows with measured or projected
+token mappings, only 19 combine high evidence coverage with severe gold-answer
+likelihood drift. ThinK and QuantizedCache instead expose structural position
+addressability: their positions remain addressable, but representation fidelity
+is unknown, so numeric ERR/ECov is not reported.
 
 ### Evidence-Annotated QA Transfer
 
@@ -122,7 +131,7 @@ Expected selected-failure counts:
 The same source may fail under several method-ratio settings. These are
 row-weighted diagnostic counts, not unique-source prevalence.
 
-## Corrected Evidence Coverage
+## Coverage Applicability
 
 The original cross-slot union could report perfect coverage when different
 layers or heads retained different evidence fragments. The public artifact uses
@@ -131,12 +140,18 @@ layers or heads retained different evidence fragments. The public artifact uses
 - `ERR_slot` averages evidence-token retention over 36 layers x 8 KV heads.
 - `ECov_slot` is the fraction of layer-KV-head-slot/evidence-span pairs that
   retain at least 50% of a support span.
-- `retention_semantics` distinguishes measured position selection from
-  structural position preservation.
+- `measured_token_coverage` uses retained original-token indices.
+- `projected_token_coverage` projects chunk retention back to original-token
+  spans and is reported separately from measured coverage.
+- `structural_position_addressability` means all token positions remain
+  addressable by construction, while representation fidelity is unmeasured.
+- `not_applicable` is reserved for runs without a defensible token mapping.
 
-ThinK and QuantizedCache preserve token positions structurally, so their
-`ECov_slot` can equal one while key channels, values, likelihoods, or outputs
-are damaged. Their coverage values are not selector-quality measurements.
+For structural methods, `ERR_slot` and `ECov_slot` are JSON `null`, their
+status is `not_applicable`, and
+`structural_position_addressability=true`. They are excluded from coverage
+means and coverage-based success/failure separation. The released C->W corpus
+contains 6,211 measured, 2,224 projected, and 4,085 structural rows.
 
 The 75/50/25 labels are configured KV ratio settings. They are not guaranteed
 to represent byte-equivalent memory footprints across token selection, channel
@@ -167,6 +182,7 @@ data/
     slot_ecov_summary.csv
     matched_method_pair_summary.csv
   audits/
+    pyramidkv_adapter_audit.json
     slot_ecov_execution_audit.json
   metadata/
     artifact_manifest.json

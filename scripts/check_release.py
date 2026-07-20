@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run local release checks for the public KVCacheBench repository."""
+"""Run local release checks for the public KVDiagnosis repository."""
 
 from __future__ import annotations
 
@@ -28,13 +28,20 @@ EXPECTED_COUNTS = {
 }
 
 EXPECTED_SIGNATURES = {
-    "low_slot_coverage": 5047,
-    "partial_slot_coverage": 2866,
-    "high_coverage_likelihood_drift": 2145,
+    "low_mapped_coverage": 5047,
+    "partial_mapped_coverage": 2866,
+    "high_mapped_coverage_likelihood_drift": 19,
+    "structural_position_likelihood_drift": 2126,
     "low_ear_candidate": 104,
     "decode_scorer_candidate": 405,
-    "conflicting_retained_signals": 1556,
+    "conflicting_diagnostic_signals": 1556,
     "ambiguous": 397,
+}
+
+EXPECTED_COVERAGE_TYPES = {
+    "measured_token_coverage": 6211,
+    "projected_token_coverage": 2224,
+    "structural_position_addressability": 4085,
 }
 
 EXPECTED_MODEL_REVISION = "b968826d9c46dd6066d109eabc6255188de91218"
@@ -102,7 +109,7 @@ def count_rows(path: Path) -> int | None:
 def verify_manifest(root: Path) -> dict[str, Any]:
     path = root / "data/metadata/artifact_manifest.json"
     manifest = json.loads(path.read_text(encoding="utf-8"))
-    if manifest.get("schema_version") != "kvcachebench.public_artifact.v0.3":
+    if manifest.get("schema_version") != "kvdiagnosis.public_artifact.v0.4":
         raise SystemExit("unexpected artifact manifest schema")
     if manifest.get("model_revision") != EXPECTED_MODEL_REVISION:
         raise SystemExit("artifact manifest model revision mismatch")
@@ -110,6 +117,8 @@ def verify_manifest(root: Path) -> dict[str, Any]:
         raise SystemExit("artifact manifest selected-failure counts mismatch")
     if manifest.get("failure_signature_counts") != EXPECTED_SIGNATURES:
         raise SystemExit("artifact manifest failure-signature counts mismatch")
+    if manifest.get("coverage_type_counts") != EXPECTED_COVERAGE_TYPES:
+        raise SystemExit("artifact manifest coverage-type counts mismatch")
     if manifest.get("full_population_counts") != EXPECTED_FULL_POPULATION:
         raise SystemExit("artifact manifest full-population counts mismatch")
 
@@ -244,6 +253,8 @@ def main() -> int:
         raise SystemExit(
             f"unexpected failure-signature counts: {report['failure_signatures']}"
         )
+    if report["coverage_types"] != dict(sorted(EXPECTED_COVERAGE_TYPES.items())):
+        raise SystemExit(f"unexpected coverage types: {report['coverage_types']}")
     if report["attention_available"] != EXPECTED_ATTENTION_AVAILABLE:
         raise SystemExit(
             f"unexpected attention coverage: {report['attention_available']}"
@@ -297,12 +308,26 @@ def main() -> int:
         for field in ("ERR_value", "ECov_value")
     ):
         raise SystemExit("context-demand JSONL contains legacy cache metrics")
-    if any(
-        row.get("ERR_slot_status") != "available"
-        or row.get("ECov_slot_status") != "available"
-        for row in context_rows
-    ):
-        raise SystemExit("context-demand JSONL has incomplete slot metrics")
+    selected_context = {
+        (row["sample_id"], row["method_name"], row["retained_budget"]): row
+        for row in rows
+        if row["dataset"] == "ruler8k"
+    }
+    for row in context_rows:
+        key = (row["sample_id"], row["method_name"], row["retained_budget"])
+        selected = selected_context[key]
+        if row.get("coverage_type") != selected.get("coverage_type"):
+            raise SystemExit("context-demand coverage type disagrees with selected corpus")
+        for metric in ("ERR_slot", "ECov_slot"):
+            if row.get(f"{metric}_status") != selected.get(f"{metric}_status"):
+                raise SystemExit("context-demand slot applicability disagrees with selected corpus")
+    expected_context_slot_metrics = sum(
+        row.get("coverage_type")
+        in {"measured_token_coverage", "projected_token_coverage"}
+        for row in selected_context.values()
+    )
+    if context_report.get("slot_metrics_available") != expected_context_slot_metrics:
+        raise SystemExit("context-demand slot-metric availability mismatch")
     if sum(row.get("EAR_status") == "available" for row in context_rows) != (
         EXPECTED_CONTEXT_ATTENTION_AVAILABLE
     ):
@@ -327,6 +352,16 @@ def main() -> int:
     if telemetry.get("all_average_gpu_utilization_at_least_75_percent") is not True:
         raise SystemExit("slot execution telemetry failed the utilization gate")
 
+    pyramid_audit = json.loads(
+        (root / "data/audits/pyramidkv_adapter_audit.json").read_text(encoding="utf-8")
+    )
+    if pyramid_audit.get("pair_count") != 7800:
+        raise SystemExit("PyramidKV adapter audit pair count mismatch")
+    for field in ("retained_original_positions_or_unit_mapping", "raw_output", "semantic_payload"):
+        equality = pyramid_audit.get("overall_equality", {}).get(field, {})
+        if equality.get("equal_pairs") != 7800 or equality.get("rate") != 1.0:
+            raise SystemExit(f"PyramidKV adapter audit mismatch for {field}")
+
     for rel in DEPRECATED_PATHS:
         if (root / rel).exists():
             raise SystemExit(f"deprecated artifact is still present: {rel}")
@@ -350,6 +385,8 @@ def main() -> int:
         root / "scripts/build_full_population_ledger.py",
         root / "scripts/build_release_artifacts.py",
         root / "scripts/regenerate_paper_artifacts.py",
+        root / "scripts/migrate_coverage_applicability.py",
+        root / "scripts/audit_pyramidkv_adapter.py",
         root / "scripts/check_release.py",
     ]
     run(

@@ -1,6 +1,6 @@
 # Metrics and Operational Signatures
 
-KVCacheBench treats FullCache as a paired control. Diagnostics describe where a
+KVDiagnosis treats FullCache as a paired control. Diagnostics describe where a
 compressed run diverges; they do not identify a causal tensor, head, or channel
 without an intervention.
 
@@ -19,12 +19,24 @@ For Qwen3-8B, a slot is one of 36 layers x 8 KV heads.
 - `ECov_slot`: fraction of slot/evidence-span pairs retaining at least 50% of
   that span.
 - `ECov_slot_threshold`: fixed at 0.5.
-- `retention_semantics`: either measured per-slot original-position mapping or
-  structural preservation of all token positions.
+- `coverage_type`: one of:
+  - `measured_token_coverage`: retained original-token indices are observed;
+  - `projected_token_coverage`: retained chunks are projected to their
+    original-token spans;
+  - `structural_position_addressability`: token positions remain addressable
+    by construction, but retained representation fidelity is not measured;
+  - `not_applicable`: no defensible token mapping is available.
+- `ERR_slot_status`, `ECov_slot_status`: `available` or
+  `not_applicable`.
+- `structural_position_addressability`: explicit boolean that is never used
+  as a numeric coverage surrogate.
 
 No paper-facing file contains the deprecated cross-slot-union `ERR`, `ECov`,
-or `DRR` fields. ThinK and QuantizedCache have structural position coverage;
-a value of one does not imply that key/value representations are preserved.
+or `DRR` fields. ThinK and QuantizedCache have structural position
+addressability, so `ERR_slot` and `ECov_slot` are null and excluded from
+coverage aggregates. For these methods, the supported statement is only:
+annotated evidence positions remain addressable, while representation fidelity
+is unknown.
 
 ## Logit Metrics
 
@@ -52,14 +64,16 @@ The release uses observational names and frozen thresholds:
 
 | Signature | Operational rule |
 |---|---|
-| `low_slot_coverage` | ECov_slot < 0.50 |
-| `partial_slot_coverage` | 0.50 <= ECov_slot < 0.90 |
-| `high_coverage_likelihood_drift` | ECov_slot >= 0.90 and delta_NLL >= 1 |
-| `low_ear_candidate` | high coverage and EAR < 0.50 without another retained-state flag |
-| `decode_scorer_candidate` | high coverage, abs(delta_NLL) <= 0.10, and TopK >= 0.90 when available |
-| `conflicting_retained_signals` | more than one primitive rule fires |
+| `low_mapped_coverage` | measured/projected ECov_slot < 0.50 |
+| `partial_mapped_coverage` | measured/projected 0.50 <= ECov_slot < 0.90 |
+| `high_mapped_coverage_likelihood_drift` | measured/projected ECov_slot >= 0.90 and delta_NLL >= 1 |
+| `structural_position_likelihood_drift` | positions are structurally addressable and delta_NLL >= 1 |
+| `low_ear_candidate` | positions are mapped at ECov_slot >= 0.90 or structurally addressable, and a valid replay has EAR < 0.50 |
+| `decode_scorer_candidate` | positions are mapped at ECov_slot >= 0.90 or structurally addressable, abs(delta_NLL) <= 0.10, and TopK >= 0.90 when available |
+| `conflicting_diagnostic_signals` | more than one primitive rule fires |
 | `ambiguous` | no frozen rule isolates a signature |
 
 Counts are method-ratio rows. A source can appear multiple times, and changing
-the thresholds can change bin membership. These signatures propose the next
-paired intervention; they are not causal classes or deployment prevalence.
+the thresholds can change bin membership. Numeric coverage rules apply only to
+measured/projected rows. These signatures propose the next paired intervention;
+they are not causal classes or deployment prevalence.

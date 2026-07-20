@@ -49,10 +49,10 @@ ECOV_LABELS = (
     "SnapKV",
     "TOVA",
     "KeyDiff",
-    "ThinK*",
+    "ThinK",
     "ChunkKV",
     "AdaKV",
-    "Quant.*",
+    "Quant.",
 )
 DATASETS = ("ruler8k", "ruler16k", "qasper", "hotpotqa")
 DATASET_LABEL = {
@@ -63,9 +63,10 @@ DATASET_LABEL = {
 }
 BUDGETS = (0.75, 0.50, 0.25)
 QA_SIGNATURES = (
-    ("low_slot_coverage", "Low coverage"),
-    ("partial_slot_coverage", "Partial coverage"),
-    ("high_coverage_likelihood_drift", "Likelihood drift"),
+    ("low_mapped_coverage", "Low mapped coverage"),
+    ("partial_mapped_coverage", "Partial mapped coverage"),
+    ("high_mapped_coverage_likelihood_drift", "Mapped-position drift"),
+    ("structural_position_likelihood_drift", "Structural-position drift"),
     ("decode_scorer_candidate", "Decoding/scoring"),
     ("ambiguous", "Ambiguous"),
 )
@@ -442,7 +443,7 @@ def plot_artifacts(output_dir, assets_dir, pooled, failure_views, diagnostics, q
     axes[1].tick_params(axis="y", left=False, labelleft=False)
     annotate(axes[0], ecov_img, ecov, "{:.2f}")
     annotate(axes[1], dnll_img, dnll, "{:.1f}")
-    for label, title, ax in zip("AB", ("Slot ECov", "Gold-answer $\\Delta$NLL"), axes):
+    for label, title, ax in zip("AB", ("Mapped slot ECov", "Gold-answer $\\Delta$NLL"), axes):
         heatmap_style(ax, len(METHODS))
         ax.set_title(rf"$\bf{{{label}}}$  {title}", loc="left", pad=2)
     fig.supxlabel("Compression setting (%)", fontsize=7.7)
@@ -498,10 +499,10 @@ def plot_artifacts(output_dir, assets_dir, pooled, failure_views, diagnostics, q
     case_ax.axhspan(0.06, 0.96, color="#F8ECE4", zorder=0)
     case_ax.plot([0.018, 0.018], [1.10, 1.88], color="#CC79A7", linewidth=2.2)
     case_ax.plot([0.018, 0.018], [0.12, 0.90], color="#D55E00", linewidth=2.2)
-    case_ax.text(0.04, 1.80, "Qasper · ThinK/50% · likelihood drift", fontsize=7.25, fontweight="bold", va="center")
+    case_ax.text(0.04, 1.80, "Qasper · ThinK/50% · structural-position drift", fontsize=7.25, fontweight="bold", va="center")
     case_ax.text(0.04, 1.56, 'ID 000196: "Groningen Meaning Bank" $\\rightarrow$ "The The $\\ldots$"', fontsize=6.85, va="center")
-    case_ax.text(0.04, 1.33, rf"ECov {qasper_case['ECov_slot']:.3f} · $\Delta$NLL {qasper_case['delta_NLL']:.3f}", fontsize=6.55, va="center", color="0.23")
-    case_ax.text(0.04, 1.12, "Positions remain, but the predictive state collapses.", fontsize=6.55, va="center", color="0.23")
+    case_ax.text(0.04, 1.33, rf"ECov N/A · position addressable · $\Delta$NLL {qasper_case['delta_NLL']:.3f}", fontsize=6.55, va="center", color="0.23")
+    case_ax.text(0.04, 1.12, "Representation fidelity is unknown; likelihood collapses.", fontsize=6.55, va="center", color="0.23")
     case_ax.text(0.04, 0.82, "HotpotQA · ChunkKV/50% · partial coverage", fontsize=7.25, fontweight="bold", va="center")
     case_ax.text(0.04, 0.58, rf"ID 000076: FullCache {hotpot_case['extracted_answer_full']} $\rightarrow$ compressed {hotpot_case['extracted_answer_compressed']}", fontsize=6.85, va="center")
     case_ax.text(0.04, 0.35, rf"ECov {hotpot_case['ECov_slot']:.3f} · $\Delta$NLL {hotpot_case['delta_NLL']:.3f}", fontsize=6.55, va="center", color="0.23")

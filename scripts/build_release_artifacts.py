@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the checked, paper-aligned public KVCacheBench artifact metadata."""
+"""Build the checked, paper-aligned public KVDiagnosis artifact metadata."""
 
 from __future__ import annotations
 
@@ -24,13 +24,20 @@ EXPECTED_DATASETS = {
 }
 
 EXPECTED_SIGNATURES = {
-    "low_slot_coverage": 5047,
-    "partial_slot_coverage": 2866,
-    "high_coverage_likelihood_drift": 2145,
+    "low_mapped_coverage": 5047,
+    "partial_mapped_coverage": 2866,
+    "high_mapped_coverage_likelihood_drift": 19,
+    "structural_position_likelihood_drift": 2126,
     "low_ear_candidate": 104,
     "decode_scorer_candidate": 405,
-    "conflicting_retained_signals": 1556,
+    "conflicting_diagnostic_signals": 1556,
     "ambiguous": 397,
+}
+
+EXPECTED_COVERAGE_TYPES = {
+    "measured_token_coverage": 6211,
+    "projected_token_coverage": 2224,
+    "structural_position_addressability": 4085,
 }
 
 EXPECTED_FULL_POPULATION = {
@@ -129,11 +136,18 @@ def build_context_demand(
         row["model_revision"] = MODEL_REVISION
         row["retention_metric_schema"] = "kvbench.slot_ecov.v1"
         row["retention_semantics"] = diagnostic["retention_semantics"]
+        row["coverage_applicability_schema"] = diagnostic["coverage_applicability_schema"]
+        row["coverage_type"] = diagnostic["coverage_type"]
+        row["structural_position_addressability"] = diagnostic[
+            "structural_position_addressability"
+        ]
         row["failure_signature"] = diagnostic["failure_signature"]
         row["ERR_slot_value"] = diagnostic["ERR_slot"]
-        row["ERR_slot_status"] = "available"
+        row["ERR_slot_status"] = diagnostic["ERR_slot_status"]
+        row["ERR_slot_reason"] = diagnostic["ERR_slot_reason"]
         row["ECov_slot_value"] = diagnostic["ECov_slot"]
-        row["ECov_slot_status"] = "available"
+        row["ECov_slot_status"] = diagnostic["ECov_slot_status"]
+        row["ECov_slot_reason"] = diagnostic["ECov_slot_reason"]
         for source_field, target_prefix, available in (
             ("delta_NLL", "delta_NLL", True),
             ("KL", "KL", True),
@@ -162,11 +176,8 @@ def build_context_demand(
         "expected_rows": EXPECTED_DATASETS["ruler8k"],
         "unique_samples": len({row["sample_id"] for row in output}),
         "duplicate_keys": len(output) - len({public_key(row) for row in output}),
-        "slot_metrics_available": sum(
-            row["ERR_slot_status"] == "available"
-            and row["ECov_slot_status"] == "available"
-            for row in output
-        ),
+        "slot_metrics_available": sum(row["ECov_slot_status"] == "available" for row in output),
+        "coverage_types": dict(sorted(Counter(row["coverage_type"] for row in output).items())),
         "attention_available": sum(row["EAR_status"] == "available" for row in output),
         "topk_available": sum(row["TopK_status"] == "available" for row in output),
         "complete": len(output) == EXPECTED_DATASETS["ruler8k"],
@@ -190,6 +201,8 @@ def build_context_demand(
                 ],
                 "attention_available": report["attention_available"],
                 "topk_available": report["topk_available"],
+                "slot_metrics_available": report["slot_metrics_available"],
+                "coverage_types": report["coverage_types"],
             },
             indent=2,
             sort_keys=True,
@@ -256,8 +269,8 @@ def build_summaries(root: Path, rows: list[dict[str, Any]]) -> dict[str, Any]:
         "topk_available": report["topk_available"],
         "thresholds": {
             "ECov_slot_span_fraction": 0.5,
-            "low_slot_coverage_below": 0.5,
-            "high_slot_coverage_at_least": 0.9,
+            "low_mapped_coverage_below": 0.5,
+            "high_mapped_coverage_at_least": 0.9,
             "likelihood_drift_delta_NLL_at_least": 1.0,
             "low_EAR_below": 0.5,
             "stable_abs_delta_NLL_at_most": 0.1,
@@ -333,16 +346,18 @@ def build_manifest(root: Path, validation: dict[str, Any]) -> None:
         if path.is_file() and path != manifest_path
     ]
     manifest = {
-        "schema_version": "kvcachebench.public_artifact.v0.3",
-        "name": "KVCacheBench public artifacts",
+        "schema_version": "kvdiagnosis.public_artifact.v0.4",
+        "name": "KVDiagnosis public artifacts",
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "model": "Qwen/Qwen3-8B",
         "model_revision": MODEL_REVISION,
         "retention_metric_schema": "kvbench.slot_ecov.v1",
+        "coverage_applicability_schema": "kvdiagnosis.coverage.v2",
         "selected_failure_definition": "full_correct == true and compressed_correct == false",
         "selected_failure_counts": EXPECTED_DATASETS,
         "full_population_counts": EXPECTED_FULL_POPULATION,
         "failure_signature_counts": EXPECTED_SIGNATURES,
+        "coverage_type_counts": EXPECTED_COVERAGE_TYPES,
         "attention_available": validation["attention_available"],
         "topk_available": validation["topk_available"],
         "methods": [
@@ -391,6 +406,8 @@ def main() -> int:
         raise ValueError(
             f"unexpected signature counts: {validation['failure_signatures']}"
         )
+    if validation["coverage_types"] != dict(sorted(EXPECTED_COVERAGE_TYPES.items())):
+        raise ValueError(f"unexpected coverage types: {validation['coverage_types']}")
 
     if args.context_demand_source:
         build_context_demand(

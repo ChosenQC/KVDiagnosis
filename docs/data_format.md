@@ -42,15 +42,23 @@ Identity and execution fields include:
 Diagnostic fields include:
 
 - `retention_metric_schema = "kvbench.slot_ecov.v1"`
+- `coverage_applicability_schema = "kvdiagnosis.coverage.v2"`
 - `ERR_slot`, `ECov_slot`, `ECov_slot_threshold`
-- `retention_semantics`
+- `ERR_slot_status`, `ECov_slot_status`, and their reason fields
+- `coverage_type`: measured token coverage, projected token coverage,
+  structural position addressability, or not applicable
+- `retention_semantics`, `structural_position_addressability`
 - `delta_NLL`, `GPR`, `KL`, `TopK`, `EAR`, `gold_rank_shift`
 - `attention_available`, `topk_available`
 - `failure_signature`, `primitive_flags`
 
 Unavailable optional metrics are JSON `null`. The availability booleans state
-whether a missing attention or TopK value is semantically unavailable. Legacy
-cross-slot-union `ERR`, `ECov`, and `DRR` are intentionally absent.
+whether a missing attention or TopK value is semantically unavailable. For
+ThinK and QuantizedCache, token positions are structurally addressable but
+representation fidelity is unknown; their `ERR_slot` and `ECov_slot` values
+are therefore null with `not_applicable` status. Structural rows are never
+included in numeric coverage means. Legacy cross-slot-union `ERR`, `ECov`,
+and `DRR` are intentionally absent.
 
 The unique row key is:
 
@@ -71,8 +79,10 @@ audited RULER-8K rows with deterministic task-template labels:
 - logit stability demand
 - attention accessibility demand
 
-The file uses `ERR_slot_value` and `ECov_slot_value`. EAR and attention
-demand are unavailable for methods without a valid eager-attention replay.
+The file carries `coverage_type` and the same applicability statuses as the
+diagnostic corpus. It uses `ERR_slot_value` and `ECov_slot_value`; structural
+rows leave both empty. EAR and attention demand are unavailable for methods
+without a valid eager-attention replay.
 
 ## Summaries and Audits
 
@@ -83,5 +93,7 @@ demand are unavailable for methods without a valid eager-attention replay.
 - `matched_method_pair_summary.csv`: matched-source failure overlap.
 - `slot_ecov_execution_audit.json`: expected/completed keys and GPU telemetry
   gate summary.
+- `pyramidkv_adapter_audit.json`: class/config/source provenance and equality
+  checks for 7,800 invalid historical SnapKV/PyramidKV pairs.
 - `artifact_manifest.json`: byte size, row count, and SHA-256 for every public
   data file.

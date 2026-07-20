@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kvcachebench"
-version = "0.3.0"
+version = "0.4.0"
 description = "Failure-focused diagnostics and public artifacts for KV cache compression benchmarks."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-authors = [{name = "KVCacheBench authors"}]
+authors = [{name = "KVDiagnosis authors"}]
 keywords = ["kv-cache", "long-context", "benchmark", "llm", "diagnostics"]
 classifiers = [
   "Programming Language :: Python :: 3",

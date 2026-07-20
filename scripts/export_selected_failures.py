@@ -7,6 +7,7 @@ import argparse
 import csv
 import json
 import math
+import sys
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -44,14 +45,14 @@ METHOD_DISPLAY = {
     "QuantizedCache": "QuantizedCache",
 }
 
-REGIME_PUBLIC_NAMES = {
-    "evidence_deletion": "low_slot_coverage",
-    "partial_evidence": "partial_slot_coverage",
-    "representation_drift": "high_coverage_likelihood_drift",
-    "access_loss": "low_ear_candidate",
-    "decode_scorer": "decode_scorer_candidate",
-    "conflicting_retained_signals": "conflicting_retained_signals",
-    "ambiguous": "ambiguous",
+LEGACY_AUDIT_REGIMES = {
+    "evidence_deletion",
+    "partial_evidence",
+    "representation_drift",
+    "access_loss",
+    "decode_scorer",
+    "conflicting_retained_signals",
+    "ambiguous",
 }
 
 KEEP_FIELDS = [
@@ -142,19 +143,12 @@ def load_audited_rows(path: Path) -> dict[tuple[str, str, str, float], dict[str,
             if row_key in rows:
                 raise ValueError(f"duplicate audited key: {row_key}")
             regime = str(raw["regime"])
-            if regime not in REGIME_PUBLIC_NAMES:
+            if regime not in LEGACY_AUDIT_REGIMES:
                 raise ValueError(f"unknown failure regime: {regime}")
-            primitive_flags = [
-                REGIME_PUBLIC_NAMES[item]
-                for item in str(raw.get("primitive_flags") or "").split(";")
-                if item
-            ]
             out: dict[str, Any] = {
                 "retention_metric_schema": "kvbench.slot_ecov.v1",
                 "retention_semantics": raw["retention_semantics"],
                 "ECov_slot_threshold": 0.5,
-                "failure_signature": REGIME_PUBLIC_NAMES[regime],
-                "primitive_flags": primitive_flags,
                 "attention_available": parse_bool(raw["attention_available"]),
                 "topk_available": parse_bool(raw["topk_available"]),
             }
@@ -170,6 +164,10 @@ def main() -> int:
     parser.add_argument("--audit-rows", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
+
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root / "src"))
+    from kvcachebench.diagnostics import classify_failure_signature, coverage_type_for_method
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     audited = load_audited_rows(args.audit_rows)
@@ -201,6 +199,28 @@ def main() -> int:
             out["model_revision"] = MODEL_REVISION
             out["method_display"] = METHOD_DISPLAY[str(row["method_name"])]
             out.update(diagnostic)
+            coverage_type = coverage_type_for_method(str(row["method_name"]))
+            out["coverage_applicability_schema"] = "kvdiagnosis.coverage.v2"
+            out["coverage_type"] = coverage_type
+            if coverage_type == "structural_position_addressability":
+                reason = (
+                    "N/A: token positions remain addressable by construction; no measured "
+                    "or projected retained-token map exists"
+                )
+                out["ERR_slot"] = None
+                out["ECov_slot"] = None
+                out["ERR_slot_status"] = "not_applicable"
+                out["ECov_slot_status"] = "not_applicable"
+                out["ERR_slot_reason"] = reason
+                out["ECov_slot_reason"] = reason
+                out["structural_position_addressability"] = True
+            else:
+                out["ERR_slot_status"] = "available"
+                out["ECov_slot_status"] = "available"
+                out["ERR_slot_reason"] = None
+                out["ECov_slot_reason"] = None
+                out["structural_position_addressability"] = False
+            out["failure_signature"], out["primitive_flags"] = classify_failure_signature(out)
             rows.append(out)
             matched.add(row_key)
 

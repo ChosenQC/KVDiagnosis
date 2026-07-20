@@ -1,0 +1,963 @@
+{
+  "audit_status": "invalid_adapter_confirmed_rows_excluded",
+  "datasets": {
+    "qasper_hotpotqa": {
+      "equality": {
+        "DRR": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "ECov": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "ERR": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "compression_ratio": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "context_length_tokens": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "correct": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "experiment_id": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "extracted_answer": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "f1": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "gold_NLL": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "metric_applicability_notes": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "model_id": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "official_task_name": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "prompt_hash": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "raw_output": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "reference_answer": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "retained_budget": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "retained_original_positions_or_unit_mapping": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "sample_id": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "score": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "semantic_payload": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        },
+        "task_key": {
+          "equal_pairs": 1200,
+          "rate": 1.0
+        }
+      },
+      "pair_count": 1200,
+      "pairs_by_compression_ratio": {
+        "0.25": 400,
+        "0.50": 400,
+        "0.75": 400
+      }
+    },
+    "ruler16k": {
+      "equality": {
+        "DRR": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "ECov": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "ERR": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "compression_ratio": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "context_length_tokens": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "correct": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "experiment_id": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "extracted_answer": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "f1": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "gold_NLL": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "metric_applicability_notes": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "model_id": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "official_task_name": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "prompt_hash": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "raw_output": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "reference_answer": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "retained_budget": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "retained_original_positions_or_unit_mapping": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "sample_id": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "score": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "semantic_payload": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "task_key": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        }
+      },
+      "pair_count": 3300,
+      "pairs_by_compression_ratio": {
+        "0.25": 1100,
+        "0.50": 1100,
+        "0.75": 1100
+      }
+    },
+    "ruler8k": {
+      "equality": {
+        "DRR": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "ECov": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "ERR": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "compression_ratio": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "context_length_tokens": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "correct": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "experiment_id": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "extracted_answer": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "f1": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "gold_NLL": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "metric_applicability_notes": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "model_id": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "official_task_name": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "prompt_hash": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "raw_output": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "reference_answer": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "retained_budget": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "retained_original_positions_or_unit_mapping": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "sample_id": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "score": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "semantic_payload": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        },
+        "task_key": {
+          "equal_pairs": 3300,
+          "rate": 1.0
+        }
+      },
+      "pair_count": 3300,
+      "pairs_by_compression_ratio": {
+        "0.25": 1100,
+        "0.50": 1100,
+        "0.75": 1100
+      }
+    }
+  },
+  "disposition": "All PyramidKV rows from this adapter are invalid method-level measurements. They are excluded from the released eight-method matrix and every denominator is recomputed.",
+  "execution_independence": {
+    "different_node_pairs": 6567,
+    "different_node_rate": 0.8419230769230769,
+    "different_slurm_job_id_pairs": 7800,
+    "different_slurm_job_id_rate": 1.0
+  },
+  "overall_equality": {
+    "DRR": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "ECov": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "ERR": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "compression_ratio": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "context_length_tokens": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "correct": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "experiment_id": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "extracted_answer": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "f1": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "gold_NLL": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "metric_applicability_notes": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "model_id": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "official_task_name": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "prompt_hash": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "raw_output": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "reference_answer": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "retained_budget": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "retained_original_positions_or_unit_mapping": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "sample_id": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "score": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "semantic_payload": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    },
+    "task_key": {
+      "equal_pairs": 7800,
+      "rate": 1.0
+    }
+  },
+  "pair_count": 7800,
+  "provenance": {
+    "corrected_public_tracker": {
+      "pyramid_budget_call": "PyramidKVPress.get_layer_budget(module, k_len)",
+      "source_file": "presses.py",
+      "source_sha256": "6e12ab37bf264167a9c2f8af4168c6cd2bebdfe921fef04c08bd2b9508e4d67b"
+    },
+    "implementations": {
+      "PyramidKVPress": {
+        "class": "PyramidKVPress",
+        "config": {
+          "beta": 20,
+          "compression_ratio": "{0.25,0.50,0.75}",
+          "kernel_size": 5,
+          "window_size": 64
+        },
+        "constructor_signature": "(compression_ratio: float = 0.0, window_size: int = 64, kernel_size: int = 5, beta: int = 20) -> None",
+        "module": "kvpress.presses.pyramidkv_press",
+        "source_file": "pyramidkv_press.py",
+        "source_sha256": "a79566f8a8f6cce0a333a78b5a3dc1e5514e1f7478b501d2bde32cdca50c23d6"
+      },
+      "SnapKVPress": {
+        "class": "SnapKVPress",
+        "config": {
+          "compression_ratio": "{0.25,0.50,0.75}",
+          "kernel_size": 5,
+          "window_size": 64
+        },
+        "constructor_signature": "(compression_ratio: float = 0.0, window_size: int = 64, kernel_size: int = 5) -> None",
+        "module": "kvpress.presses.snapkv_press",
+        "source_file": "snapkv_press.py",
+        "source_sha256": "53bb0ed71cba0d05a29689584eef007c87c3ddaf39471ab9c806e32c2e6a5bf2"
+      }
+    },
+    "invalid_experiment_adapter": {
+      "source_file": "presses.py",
+      "source_sha256": "a8bff61c807794953de33d6ced1f69dc0ad82937b6fb5588038fafc2dff5f3c5"
+    },
+    "kvpress_release_source_commit": "fa7a0dc",
+    "kvpress_version": "0.5.3"
+  },
+  "representative_pairs": [
+    {
+      "PyramidKVPress": {
+        "output_sha256": "d1626650b988c20609bac0e75dbf284e0272590ebfc931a3dcdd295390ee27a7",
+        "retained_index_count_with_repetition": 7950,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "514e8b39ca305f2a7ce899138277ee15ed4374be06373a13b0cdef53b7d608f4",
+        "retained_index_tail": [
+          7942,
+          7943,
+          7944,
+          7945,
+          7946,
+          7947,
+          7948,
+          7949
+        ]
+      },
+      "SnapKVPress": {
+        "output_sha256": "d1626650b988c20609bac0e75dbf284e0272590ebfc931a3dcdd295390ee27a7",
+        "retained_index_count_with_repetition": 7950,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "514e8b39ca305f2a7ce899138277ee15ed4374be06373a13b0cdef53b7d608f4",
+        "retained_index_tail": [
+          7942,
+          7943,
+          7944,
+          7945,
+          7946,
+          7947,
+          7948,
+          7949
+        ]
+      },
+      "compression_ratio": 0.25,
+      "dataset": "ruler8k",
+      "outputs_equal": true,
+      "retained_budget": 0.75,
+      "retained_indices_equal": true,
+      "sample_id": "cwe_000000"
+    },
+    {
+      "PyramidKVPress": {
+        "output_sha256": "020308819d009b4ec96fafaa4731f87b9224884c2cbe8b0101955f1575ceec06",
+        "retained_index_count_with_repetition": 7950,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "514e8b39ca305f2a7ce899138277ee15ed4374be06373a13b0cdef53b7d608f4",
+        "retained_index_tail": [
+          7942,
+          7943,
+          7944,
+          7945,
+          7946,
+          7947,
+          7948,
+          7949
+        ]
+      },
+      "SnapKVPress": {
+        "output_sha256": "020308819d009b4ec96fafaa4731f87b9224884c2cbe8b0101955f1575ceec06",
+        "retained_index_count_with_repetition": 7950,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "514e8b39ca305f2a7ce899138277ee15ed4374be06373a13b0cdef53b7d608f4",
+        "retained_index_tail": [
+          7942,
+          7943,
+          7944,
+          7945,
+          7946,
+          7947,
+          7948,
+          7949
+        ]
+      },
+      "compression_ratio": 0.5,
+      "dataset": "ruler8k",
+      "outputs_equal": true,
+      "retained_budget": 0.5,
+      "retained_indices_equal": true,
+      "sample_id": "cwe_000000"
+    },
+    {
+      "PyramidKVPress": {
+        "output_sha256": "38948df0c93c335a2fa27f194194c4ae7d4d3495db9a179c1e160cfe3e1a99aa",
+        "retained_index_count_with_repetition": 7933,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "ba7aad9012b865cd41fbdb4d585355cf87900209e58686a663928bef9bb8e1a3",
+        "retained_index_tail": [
+          7942,
+          7943,
+          7944,
+          7945,
+          7946,
+          7947,
+          7948,
+          7949
+        ]
+      },
+      "SnapKVPress": {
+        "output_sha256": "38948df0c93c335a2fa27f194194c4ae7d4d3495db9a179c1e160cfe3e1a99aa",
+        "retained_index_count_with_repetition": 7933,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "ba7aad9012b865cd41fbdb4d585355cf87900209e58686a663928bef9bb8e1a3",
+        "retained_index_tail": [
+          7942,
+          7943,
+          7944,
+          7945,
+          7946,
+          7947,
+          7948,
+          7949
+        ]
+      },
+      "compression_ratio": 0.75,
+      "dataset": "ruler8k",
+      "outputs_equal": true,
+      "retained_budget": 0.25,
+      "retained_indices_equal": true,
+      "sample_id": "cwe_000000"
+    },
+    {
+      "PyramidKVPress": {
+        "output_sha256": "4640ae13d3d08d8966a68fa6705ea55c685e9d055d72d729af84c19f1440e09b",
+        "retained_index_count_with_repetition": 15886,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "07e043e559b1bea1acab1a219255612dffe47921655bf18fa71bdc5b4f9a7a2c",
+        "retained_index_tail": [
+          15878,
+          15879,
+          15880,
+          15881,
+          15882,
+          15883,
+          15884,
+          15885
+        ]
+      },
+      "SnapKVPress": {
+        "output_sha256": "4640ae13d3d08d8966a68fa6705ea55c685e9d055d72d729af84c19f1440e09b",
+        "retained_index_count_with_repetition": 15886,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "07e043e559b1bea1acab1a219255612dffe47921655bf18fa71bdc5b4f9a7a2c",
+        "retained_index_tail": [
+          15878,
+          15879,
+          15880,
+          15881,
+          15882,
+          15883,
+          15884,
+          15885
+        ]
+      },
+      "compression_ratio": 0.25,
+      "dataset": "ruler16k",
+      "outputs_equal": true,
+      "retained_budget": 0.75,
+      "retained_indices_equal": true,
+      "sample_id": "cwe_000000"
+    },
+    {
+      "PyramidKVPress": {
+        "output_sha256": "900b8707ae5ebd63b06c8cb5c0cc446e4a99357812a5985c872fb84cf9687641",
+        "retained_index_count_with_repetition": 15886,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "07e043e559b1bea1acab1a219255612dffe47921655bf18fa71bdc5b4f9a7a2c",
+        "retained_index_tail": [
+          15878,
+          15879,
+          15880,
+          15881,
+          15882,
+          15883,
+          15884,
+          15885
+        ]
+      },
+      "SnapKVPress": {
+        "output_sha256": "900b8707ae5ebd63b06c8cb5c0cc446e4a99357812a5985c872fb84cf9687641",
+        "retained_index_count_with_repetition": 15886,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "07e043e559b1bea1acab1a219255612dffe47921655bf18fa71bdc5b4f9a7a2c",
+        "retained_index_tail": [
+          15878,
+          15879,
+          15880,
+          15881,
+          15882,
+          15883,
+          15884,
+          15885
+        ]
+      },
+      "compression_ratio": 0.5,
+      "dataset": "ruler16k",
+      "outputs_equal": true,
+      "retained_budget": 0.5,
+      "retained_indices_equal": true,
+      "sample_id": "cwe_000000"
+    },
+    {
+      "PyramidKVPress": {
+        "output_sha256": "1054080bdc58d6df1da9cea579f010b67b055af5a8902b9b5f36604e2482235f",
+        "retained_index_count_with_repetition": 15863,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "a5cc700c70649d6440936a0ddad455a2b397ba30ebf82cbac6682b321c4387fa",
+        "retained_index_tail": [
+          15878,
+          15879,
+          15880,
+          15881,
+          15882,
+          15883,
+          15884,
+          15885
+        ]
+      },
+      "SnapKVPress": {
+        "output_sha256": "1054080bdc58d6df1da9cea579f010b67b055af5a8902b9b5f36604e2482235f",
+        "retained_index_count_with_repetition": 15863,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "a5cc700c70649d6440936a0ddad455a2b397ba30ebf82cbac6682b321c4387fa",
+        "retained_index_tail": [
+          15878,
+          15879,
+          15880,
+          15881,
+          15882,
+          15883,
+          15884,
+          15885
+        ]
+      },
+      "compression_ratio": 0.75,
+      "dataset": "ruler16k",
+      "outputs_equal": true,
+      "retained_budget": 0.25,
+      "retained_indices_equal": true,
+      "sample_id": "cwe_000000"
+    },
+    {
+      "PyramidKVPress": {
+        "output_sha256": "47302ffeef819c511c05d58fc74f717d8e35c344c9bc16005169f507ce0b7fed",
+        "retained_index_count_with_repetition": 1280,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "9b7bf6a8f946586074ad3a968f527fcd219da469c4c8f575fb83413e179f0bc0",
+        "retained_index_tail": [
+          1272,
+          1273,
+          1274,
+          1275,
+          1276,
+          1277,
+          1278,
+          1279
+        ]
+      },
+      "SnapKVPress": {
+        "output_sha256": "47302ffeef819c511c05d58fc74f717d8e35c344c9bc16005169f507ce0b7fed",
+        "retained_index_count_with_repetition": 1280,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "9b7bf6a8f946586074ad3a968f527fcd219da469c4c8f575fb83413e179f0bc0",
+        "retained_index_tail": [
+          1272,
+          1273,
+          1274,
+          1275,
+          1276,
+          1277,
+          1278,
+          1279
+        ]
+      },
+      "compression_ratio": 0.25,
+      "dataset": "qasper_hotpotqa",
+      "outputs_equal": true,
+      "retained_budget": 0.75,
+      "retained_indices_equal": true,
+      "sample_id": "hotpotqa_000000"
+    },
+    {
+      "PyramidKVPress": {
+        "output_sha256": "47302ffeef819c511c05d58fc74f717d8e35c344c9bc16005169f507ce0b7fed",
+        "retained_index_count_with_repetition": 1280,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "9b7bf6a8f946586074ad3a968f527fcd219da469c4c8f575fb83413e179f0bc0",
+        "retained_index_tail": [
+          1272,
+          1273,
+          1274,
+          1275,
+          1276,
+          1277,
+          1278,
+          1279
+        ]
+      },
+      "SnapKVPress": {
+        "output_sha256": "47302ffeef819c511c05d58fc74f717d8e35c344c9bc16005169f507ce0b7fed",
+        "retained_index_count_with_repetition": 1280,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "9b7bf6a8f946586074ad3a968f527fcd219da469c4c8f575fb83413e179f0bc0",
+        "retained_index_tail": [
+          1272,
+          1273,
+          1274,
+          1275,
+          1276,
+          1277,
+          1278,
+          1279
+        ]
+      },
+      "compression_ratio": 0.5,
+      "dataset": "qasper_hotpotqa",
+      "outputs_equal": true,
+      "retained_budget": 0.5,
+      "retained_indices_equal": true,
+      "sample_id": "hotpotqa_000000"
+    },
+    {
+      "PyramidKVPress": {
+        "output_sha256": "acc60cc7bdd5fbfd7289bcf70b24fda761b25cf68b89f590ca1349ffca25af3d",
+        "retained_index_count_with_repetition": 1239,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "2b930b7d8656bf22543ced205ee0cde1293b0dae9f953381f383c89ab548b3d8",
+        "retained_index_tail": [
+          1272,
+          1273,
+          1274,
+          1275,
+          1276,
+          1277,
+          1278,
+          1279
+        ]
+      },
+      "SnapKVPress": {
+        "output_sha256": "acc60cc7bdd5fbfd7289bcf70b24fda761b25cf68b89f590ca1349ffca25af3d",
+        "retained_index_count_with_repetition": 1239,
+        "retained_index_preview": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "retained_index_sha256": "2b930b7d8656bf22543ced205ee0cde1293b0dae9f953381f383c89ab548b3d8",
+        "retained_index_tail": [
+          1272,
+          1273,
+          1274,
+          1275,
+          1276,
+          1277,
+          1278,
+          1279
+        ]
+      },
+      "compression_ratio": 0.75,
+      "dataset": "qasper_hotpotqa",
+      "outputs_equal": true,
+      "retained_budget": 0.25,
+      "retained_indices_equal": true,
+      "sample_id": "hotpotqa_000000"
+    }
+  ],
+  "root_cause": "The retained-index tracker replaced PyramidKVPress.compress with a generic scorer compressor that used one fixed int(k_len * (1 - compression_ratio)) budget. This bypassed PyramidKVPress.get_layer_budget and made the executed path identical to SnapKV.",
+  "schema_version": "kvdiagnosis.pyramidkv_adapter_audit.v1"
+}

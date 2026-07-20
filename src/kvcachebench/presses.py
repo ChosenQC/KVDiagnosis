@@ -88,6 +88,18 @@ def attach_retained_tracker(press) -> RetainedTracker:
         gather_indices = indices.unsqueeze(-1).expand(-1, -1, -1, module.head_dim)
         return keys.gather(2, gather_indices).contiguous(), values.gather(2, gather_indices).contiguous()
 
+    def pyramidkv_compress_with_recording(self, module, hidden_states, keys, values, attentions, kwargs):
+        if self.compression_ratio == 0:
+            return keys, values
+        scores = self.score(module, hidden_states, keys, values, attentions, kwargs)
+        k_len = keys.shape[2]
+        n_kept = self.get_layer_budget(module, k_len)
+        indices = scores.topk(n_kept, dim=-1).indices
+        layer_idx = int(getattr(module, "layer_idx", len(tracker.records)))
+        tracker.record(layer_idx, indices)
+        gather_indices = indices.unsqueeze(-1).expand(-1, -1, -1, module.head_dim)
+        return keys.gather(2, gather_indices).contiguous(), values.gather(2, gather_indices).contiguous()
+
     def chunkkv_compress_with_recording(self, module, hidden_states, keys, values, attentions, kwargs):
         if self.press.compression_ratio == 0:
             return keys, values
@@ -157,6 +169,8 @@ def attach_retained_tracker(press) -> RetainedTracker:
         press.compress = MethodType(chunkkv_compress_with_recording, press)
     elif press_name == "AdaKVPress" and hasattr(press, "press"):
         press.compress = MethodType(adakv_compress_with_recording, press)
+    elif press_name == "PyramidKVPress" and hasattr(press, "get_layer_budget"):
+        press.compress = MethodType(pyramidkv_compress_with_recording, press)
     elif hasattr(press, "score") and hasattr(press, "compression_ratio"):
         press.compress = MethodType(scorer_compress_with_recording, press)
     return tracker

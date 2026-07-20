@@ -24,7 +24,8 @@ python scripts/regenerate_paper_artifacts.py \
 The release checker validates the complete population ledger, selected C->W
 identity, unique keys, slot metric schema, observational signatures, trace
 coverage, immutable model revision, sanitized execution telemetry, file sizes,
-secret patterns, every manifest hash, and CPU-only paper-table regeneration.
+secret patterns, every manifest hash, the frozen PyramidKV adapter audit, and
+CPU-only paper-table regeneration.
 
 ## Rebuilding the Public Corpus
 
@@ -65,6 +66,38 @@ python scripts/build_release_artifacts.py \
 ```
 
 Run `python scripts/check_release.py` after every rebuild.
+
+## Coverage Applicability Migration
+
+The release uses `kvdiagnosis.coverage.v2`. To migrate an older export in
+place and regenerate signatures:
+
+```bash
+python scripts/migrate_coverage_applicability.py --root .
+```
+
+The migration preserves numeric ERR/ECov only for measured original-token maps
+and projected chunk maps. ThinK and QuantizedCache become structural-position
+rows with null ERR/ECov and `not_applicable` status.
+
+## PyramidKV Adapter Audit
+
+The frozen audit can be regenerated from immutable raw run directories:
+
+```bash
+python scripts/audit_pyramidkv_adapter.py \
+  --run-root ruler8k=/path/to/ruler8k/raw_runs \
+  --run-root ruler16k=/path/to/ruler16k/raw_runs \
+  --run-root qa=/path/to/qa/raw_runs \
+  --adapter-source /path/to/historical/invalid/presses.py \
+  --output data/audits/pyramidkv_adapter_audit.json
+```
+
+The checker requires 7,800 complete SnapKV/PyramidKV pairs, distinct Slurm job
+IDs for every pair, and exact equality of the retained mappings, outputs,
+scores, and gold NLL. The corrected tracker calls
+`PyramidKVPress.get_layer_budget`; the invalid historical rows are not
+reintroduced into benchmark aggregates.
 
 ## Regenerating Paper Results
 

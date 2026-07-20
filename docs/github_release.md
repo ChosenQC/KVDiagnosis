@@ -23,11 +23,13 @@ Expected counts:
 - HotpotQA: 827
 - valid attention rows: 7,038
 - valid TopK rows: 8,400
+- measured/projected/structural coverage rows: 6,211 / 2,224 / 4,085
 
 The release gate also verifies all manifest hashes, the immutable model
-revision, exact equality between ledger C->W rows and selected failures, 19/19
-accepted telemetry jobs, the 75% average GPU-utilization gate, and absence of
-deprecated PyramidKV/legacy-union artifacts.
+revision, exact equality between ledger C->W rows and selected failures, the
+7,800-pair PyramidKV adapter audit, 19/19 accepted telemetry jobs, the 75%
+average GPU-utilization gate, and absence of deprecated PyramidKV/legacy-union
+artifacts.
 
 ## Push To GitHub
 
@@ -45,4 +47,4 @@ logs, or per-unit `.done.json` files.
 
 - Confirm GitHub Actions passes.
 - Add the immutable repository/release URL to the paper artifact statement.
-- Tag the paper artifact, for example `v0.3.0-paper-artifact`.
+- Tag the paper artifact, for example `v0.4.0-paper-artifact`.

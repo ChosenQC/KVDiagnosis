@@ -1,11 +1,16 @@
 {
   "attention_available": 4608,
   "complete": true,
+  "coverage_types": {
+    "measured_token_coverage": 3081,
+    "projected_token_coverage": 1043,
+    "structural_position_addressability": 1846
+  },
   "duplicate_keys": 0,
   "expected_rows": 5970,
   "rows": 5970,
   "schema_version": "kvcachebench.context_demand.v0.2",
-  "slot_metrics_available": 5970,
+  "slot_metrics_available": 4124,
   "topk_available": 5970,
   "unique_samples": 968
 }

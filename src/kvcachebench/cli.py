@@ -34,10 +34,10 @@ def cmd_summarize(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="kvcachebench", description="KVCacheBench diagnostics utilities")
+    parser = argparse.ArgumentParser(prog="kvcachebench", description="KVDiagnosis utilities")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    validate = sub.add_parser("validate", help="Validate a KVCacheBench JSONL artifact")
+    validate = sub.add_parser("validate", help="Validate a KVDiagnosis JSONL artifact")
     validate.add_argument("path")
     validate.add_argument("--kind", default="selected-failures", choices=["selected-failures", "jsonl"])
     validate.set_defaults(func=cmd_validate)
