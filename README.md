@@ -93,9 +93,15 @@ is unknown, so numeric ERR/ECov is not reported.
   <img src="assets/qa-transfer.png" width="82%" alt="Failure-signature transfer to Qasper and HotpotQA">
 </p>
 
-The same coverage and likelihood signatures appear on Qasper and HotpotQA.
+<p align="center">
+  <img src="assets/qa-cases.png" width="72%" alt="Paired Qasper and HotpotQA diagnostic cases">
+</p>
+
+The category distributions show that the same coverage and likelihood
+signatures appear on Qasper and HotpotQA. The paired cases contrast
+structural-position likelihood drift with partial projected evidence coverage.
 These evidence-mapped bridges support diagnostic transfer, not official QA
-ranking.
+ranking or causal labels.
 
 ## Quick Start
 
@@ -193,7 +199,7 @@ paper_artifacts/generated/
   failure_views.csv
   diagnostic_profiles.csv
   qa_signature_counts.csv
-  {population-outcomes,failure-views,diagnostic-profiles,qa-transfer}.{pdf,png}
+  {population-outcomes,failure-views,diagnostic-profiles,qa-transfer,qa-cases}.{pdf,png}
 ```
 
 ## Environment and Provenance

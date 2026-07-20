@@ -450,9 +450,7 @@ def plot_artifacts(output_dir, assets_dir, pooled, failure_views, diagnostics, q
     save(fig, "diagnostic-profiles")
 
     categories = [label for _, label in QA_SIGNATURES]
-    fig = plt.figure(figsize=(7.0, 2.35), constrained_layout=True)
-    grid = fig.add_gridspec(1, 2, width_ratios=[1.0, 1.14], wspace=0.10)
-    ax = fig.add_subplot(grid[0])
+    fig, ax = plt.subplots(figsize=(4.65, 2.15), constrained_layout=True)
     ypos = np.arange(len(categories), dtype=float)
     styles = {"qasper": ("#CC79A7", "D", 5.5), "hotpotqa": ("#D55E00", "^", -7.0)}
     values = {}
@@ -474,7 +472,7 @@ def plot_artifacts(output_dir, assets_dir, pooled, failure_views, diagnostics, q
     ax.set_xlabel(r"Share of C$\rightarrow$W rows (%)")
     ax.grid(axis="x", color="0.88", linewidth=0.55)
     ax.spines[["top", "right"]].set_visible(False)
-    ax.set_title(r"$\bf{A}$  Diagnostic categories", loc="left", pad=27)
+    ax.set_title("Diagnostic-category composition", loc="left", pad=27)
     ax.legend(
         loc="lower left",
         bbox_to_anchor=(0.0, 1.01),
@@ -484,6 +482,8 @@ def plot_artifacts(output_dir, assets_dir, pooled, failure_views, diagnostics, q
         handletextpad=0.45,
         columnspacing=1.2,
     )
+
+    save(fig, "qa-transfer")
 
     qasper_case = next(
         row
@@ -501,41 +501,41 @@ def plot_artifacts(output_dir, assets_dir, pooled, failure_views, diagnostics, q
         and row["method_name"] == "ChunkKVPress_Knorm"
         and row["retained_budget"] == 0.5
     )
-    case_ax = fig.add_subplot(grid[1])
+    fig, case_ax = plt.subplots(figsize=(3.35, 1.62), constrained_layout=True)
     case_ax.set_xlim(0, 1)
     case_ax.set_ylim(0, 1)
     case_ax.axis("off")
-    case_ax.set_title(r"$\bf{B}$  Representative cases", loc="left", pad=27)
-    case_ax.plot([0.018, 0.018], [0.58, 0.94], color="#CC79A7", linewidth=2.4)
-    case_ax.plot([0.018, 0.018], [0.06, 0.42], color="#D55E00", linewidth=2.4)
+    case_ax.plot([0.018, 0.018], [0.54, 0.96], color="#CC79A7", linewidth=2.4)
+    case_ax.plot([0.018, 0.018], [0.04, 0.46], color="#D55E00", linewidth=2.4)
+    case_ax.plot([0.018, 0.99], [0.50, 0.50], color="0.84", linewidth=0.55)
     case_ax.text(
         0.045,
-        0.89,
-        "Qasper | ThinK, 50% | structural drift",
-        fontsize=7.4,
+        0.90,
+        "Qasper | ThinK, 50% | structural-position drift",
+        fontsize=7.2,
         fontweight="bold",
         va="center",
     )
     case_ax.text(
         0.045,
-        0.74,
-        r'FullCache: "Groningen Meaning Bank"  $\rightarrow$  compressed: "The The $\ldots$"',
-        fontsize=7.2,
+        0.72,
+        r'FullCache: "Groningen Meaning Bank"  $\rightarrow$  "The The $\ldots$"',
+        fontsize=6.9,
         va="center",
     )
     case_ax.text(
         0.045,
-        0.61,
-        rf"ECov N/A; $\Delta$NLL={qasper_case['delta_NLL']:.3f}. Position addressability does not establish fidelity.",
-        fontsize=6.8,
+        0.58,
+        rf"ECov N/A; $\Delta$NLL={qasper_case['delta_NLL']:.3f}. Positions remain addressable; fidelity is unknown.",
+        fontsize=6.5,
         va="center",
         color="0.23",
     )
     case_ax.text(
         0.045,
-        0.37,
+        0.40,
         "HotpotQA | ChunkKV, 50% | partial projected coverage",
-        fontsize=7.4,
+        fontsize=7.2,
         fontweight="bold",
         va="center",
     )
@@ -543,18 +543,18 @@ def plot_artifacts(output_dir, assets_dir, pooled, failure_views, diagnostics, q
         0.045,
         0.22,
         rf"FullCache: {hotpot_case['extracted_answer_full']}  $\rightarrow$  compressed: {hotpot_case['extracted_answer_compressed']}",
-        fontsize=7.2,
+        fontsize=6.9,
         va="center",
     )
     case_ax.text(
         0.045,
-        0.09,
-        rf"ECov={hotpot_case['ECov_slot']:.3f}; $\Delta$NLL={hotpot_case['delta_NLL']:.3f}. Part of the support chain survives.",
-        fontsize=6.8,
+        0.08,
+        rf"ECov={hotpot_case['ECov_slot']:.3f}; $\Delta$NLL={hotpot_case['delta_NLL']:.3f}. Only part of the support chain remains.",
+        fontsize=6.5,
         va="center",
         color="0.23",
     )
-    save(fig, "qa-transfer")
+    save(fig, "qa-cases")
 
 
 def main() -> int:
